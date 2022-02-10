@@ -119,8 +119,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-MEDIA_URL ="media/"
-MEDIA_ROOT ="C:/Users/robot/pdx_code/bootcamp/capstone/capstone/Enjoy_Project/enjoy_app/static/enjoy_app/media"
+MEDIA_URL =""
+MEDIA_ROOT =""
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

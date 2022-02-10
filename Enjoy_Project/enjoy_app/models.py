@@ -7,10 +7,10 @@ class ImageLibrary(models.Model):
     image_name = models.CharField(max_length=15)
 
 
-    image_location = models.ImageField()
+   # image_location = models.ImageField()
 
     #upload
-   # image_location = models.ImageField(upload_to="images")
+    image_location = models.ImageField(upload_to="media")
 
 
 
