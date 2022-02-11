@@ -1,6 +1,60 @@
 
+ 
+     h1{
+     
+         font-style: italic;
+         
+         }
+         
+         header{
 
+            height: 10vh;
 
+         }
+
+         nav{
+            height: 5vh;
+
+         }
+         
+     #mainBody{
+   
+
+         max-height: 85vh;
+         background-color: azure;
+        display: flex;
+        flex-wrap: nowrap;
+        
+         } 
+ 
+ 
+     #imageChoice{
+ 
+        flex-basis: 225px;
+         min-height: 100%;
+         min-width: 225px;
+         max-width: 20vw;
+
+        flex-direction: column;
+        background-color: aqua;       
+        justify-content: center;
+
+         }
+ 
+         
+     #canvasArea{
+        
+         min-height: fit-content;
+         flex-basis: auto;
+         background-color: lightblue;
+        min-width: 80vw;
+        justify-content: center;
+        display: flex;
+        
+
+     }
+ 
+ 
 
 
 
@@ -46,10 +100,10 @@
 
 
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and up)
 @media only screen and (min-width: 1200px) {
-
-
+*/
+/*
 
     image{
 
