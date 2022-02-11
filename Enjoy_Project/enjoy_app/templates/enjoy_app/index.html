@@ -11,26 +11,49 @@
     <link rel="stylesheet" href="static/enjoy_app/style.css">
     <title>Enjoy</title>
 </head>
-<body>
+<body>   
+
+    <header>
+
+    <h1>Index home</h1>
+    <div id="app"> {{ message }} </div>
+    </header>
+
+    <nav>test nav bar</nav>
+
+    <div id="mainBody" >
+        <div id="imageChoice">
+
+        {% for img in image %}
+            
+        <img class ="testclick" src="{{ img.thumbnail_image_location }}" id="{{ img.image_location }}" /><br><br>
+        {% endfor %}
+  <!--          
+
+            <img src="{{ img.thumbnail_image_location }}"/><br><br>
+            
+  -->
+         {{ image.1.thumbnail_image_location }}
+        </div>
+        
+        <img hidden id ="testchange" src="" /><br><br>
+
+
+
+        <div id="canvasArea">
+
+
+            <canvas id="canvas" width="150" height="150">
+
+            </canvas>            
+
+        </div>
+
+    </div>
     
-<h1>Index home</h1>
 
 
-
-
-    
-    {% for item in test %}
-
-        {{ item }}
-
-    {% endfor %}
-
-    {% for img in image %}
-
-    <img src="{{ img.image_location }}"/><br><br>
-
-    {% endfor %}
-
-    <script src="{% static 'enjoy_app/script.js' %}"  ></script>
+  
+    <script src="{% static 'enjoy_app/script.js' %}" ></script>
 </body>
 </html>

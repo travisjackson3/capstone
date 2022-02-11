@@ -15,40 +15,41 @@ from enjoy_app.models import ImageLibrary
 def index(request):
 
 
-
     ### image loading test
+    ### just send string of locations on post????
 
-    testImage  =  ImageLibrary.objects.get(image_name = "testtest")
+    testImage  = ImageLibrary.objects.get(image_name = "world")
     testImage2 = ImageLibrary.objects.get(image_name = "mandala2")
     testImage3 = ImageLibrary.objects.get(image_name = "wolf")
     testImage4 = ImageLibrary.objects.get(image_name = "blossom")
 
 
-    with Image.open(testImage.image_location) as testing:
+
+    ###Image editing
+   # with Image.open(testImage.image_location) as testing:
        # (width, height) = (testing.width // 1, testing.height //1)
-       # testresize = testing.resize((width, height))
-       # size = 200, 200
-       # testing.thumbnail(size, Image.ANTIALIAS)
-       ...
-      
+        #testresize = testing.resize((width, height))
+     #   size = 400, 400
+  #      testing.thumbnail(size, Image.ANTIALIAS)
+          
 
 
    # print(testresize)
-   # testresize.save(f"{testImage.image_location}")
-   #     testing.save(f"{testImage.image_location}")
-   # testresize.close()
+    #testresize.save(f"{testImage.image_location}")
+  # testing.save(f"{testImage.image_location}")
+   # testing.close()
 
     
-    print(testImage.image_location)   
-    print(testImage.image_location.width)
-    print(testImage.image_location.height)
+   # print(testImage.image_location)   
+    #print(testImage.image_location.width)
+  #  print(testImage.image_location.height)
 
 
 
     context = {"test": [1,2,3], "image": [testImage, testImage2, testImage3, testImage4]}
    # context = {"imagetest": testImage}
 
-    print(context)
+  #  print(context)
 
 
     return render(request, "enjoy_app/index.html", context)
@@ -58,12 +59,6 @@ def index(request):
 
 
 
-
-
-
-
-
-#https://www.geeksforgeeks.org/python-uploading-images-in-django/
 
 
 
@@ -99,3 +94,40 @@ def logout_view(request):
     ...
    # logout(request)
     # redirect to a success page.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#https://www.geeksforgeeks.org/python-uploading-images-in-django/
+
+
+
+
+
+        ###Image editing
+   # with Image.open(testImage.image_location) as testing:
+       # (width, height) = (testing.width // 1, testing.height //1)
+       # testresize = testing.resize((width, height))
+       # size = 200, 200
+       # testing.thumbnail(size, Image.ANTIALIAS)
+      #      ...    
+
+
+   # print(testresize)
+   # testresize.save(f"{testImage.image_location}")
+   #     testing.save(f"{testImage.image_location}")
+   # testresize.close()

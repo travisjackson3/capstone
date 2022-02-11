@@ -6,11 +6,8 @@ from django.forms import CharField
 class ImageLibrary(models.Model):
     image_name = models.CharField(max_length=15)
 
-
-   # image_location = models.ImageField()
-
-    #upload
     image_location = models.ImageField(upload_to="media")
+    thumbnail_image_location = models.ImageField(upload_to="media")
 
 
 

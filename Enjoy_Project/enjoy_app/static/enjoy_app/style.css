@@ -1,5 +1,96 @@
-h1{
+
+
+
+
+
+
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+
+    h1{
+        text-align: center;
+    }
+}
+
+
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+
     
-font-style: italic;
+    h1{
+        text-align: center;
+    }
+
+}
+
+
+
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+
+    h1 {
+        text-align: center;
+    }
+}
+
+
+
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+
+
+    image{
+
+       width: fit-content;
+
+    }
+
+    h1{
+    
+        font-style: italic;
+        
+        }
+        
+        
+        
+    #mainBody{
+        
+        display: block;
+        min-width: 100vw;
+        min-height: 100vh;
+
+        } 
+
+
+    #imageChoice{
+
+        align-content: center;
+        float: left;
+        min-height: 100%;
+        width: 250px;
+        background-color: aqua;       
+        
+        }
+
+        
+    #canvasArea{
+        min-height: 100%;
+        display: flex;
+        background-color: lightblue;
+    }
+
+
 
 }
