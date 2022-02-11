@@ -39,17 +39,11 @@ def index(request):
   # testing.save(f"{testImage.image_location}")
    # testing.close()
 
-    
-   # print(testImage.image_location)   
-    #print(testImage.image_location.width)
-  #  print(testImage.image_location.height)
-
-
 
     context = {"test": [1,2,3], "image": [testImage, testImage2, testImage3, testImage4]}
    # context = {"imagetest": testImage}
 
-  #  print(context)
+    print(context)
 
 
     return render(request, "enjoy_app/index.html", context)

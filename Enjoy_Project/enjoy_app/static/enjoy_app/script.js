@@ -34,12 +34,19 @@ let testchange = document.getElementById("testchange")
 testClick.forEach(element => element.addEventListener('click', event => {
 
 ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+ctx.fillStyle ="white";
+ctx.fillRect(0, 0, canvas.width, canvas.height)
 //testchange = document.getElementById("testchange")
+
+
 let img =document.createElement("img");
  img.src = element.id;
 
  //testchange.setAttribute("src", element.id)
-    img.onload = function(){ctx.drawImage(img,0, 0, img.width, img.height )}
+ 
+    img.onload = function(){ctx.drawImage(img ,0, 0, img.width, img.height )}
+
  
 
 }));
