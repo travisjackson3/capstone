@@ -3,7 +3,13 @@
 
 var image = new Image();
 
+const testClick = document.querySelectorAll('.testclick');
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+let testchange = document.getElementById("testchange")
 
+ctx.fillStyle ="white";
+ctx.fillRect(0, 0, canvas.width, canvas.height)
 
 /* let testclick = document.getElementsByClassName("#testclick")
 
@@ -26,10 +32,7 @@ testclick.addEventListener("click", function(){
 
 
 //let testchange = document.getElementById("#test")
-const testClick = document.querySelectorAll('.testclick');
-let canvas = document.getElementById("canvas");
-let ctx = canvas.getContext("2d");
-let testchange = document.getElementById("testchange")
+
 
 testClick.forEach(element => element.addEventListener('click', event => {
 

@@ -53,24 +53,24 @@ nav {
 #contentContainer {
     height: fit-content;
     background-color: yellow;
-    max-width: 1024px;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
-    border: 2px black solid ;
+
 }
 
 
 #mainBody {
 
 
-    max-height: 85vh;
+    min-height: fit-content;
 
     background-color: azure;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    border: 2px black solid ;
+
 
 }
 
@@ -86,7 +86,7 @@ nav {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    border: 2px black solid ;
+
 
     overflow-x: scroll;
 }
@@ -108,17 +108,11 @@ nav {
     justify-content: center;
 
     min-width: 100%;
-    border: 2px black solid ;
+
 
 
 }
 
-
-
-canvas{
-    height:500px;
-    border: 2px black solid ;
-}
 
 footer{
 min-height: 5vh;
@@ -126,10 +120,34 @@ background-color: beige;
 }
 
 
+canvas{
 
+    width: 310px;
+    height: 310px;
+
+}
+@media only screen and (min-width: 420px) {
+
+    canvas{
+
+        width: 400px;
+        height: 400px;
+    }
+
+}
+
+@media only screen and (min-width: 500px) {
+
+    canvas{
+
+        width: 400px;
+        height: 400px;
+    }
+
+}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 625px) {
 
 
     h1 {
@@ -141,14 +159,16 @@ background-color: beige;
     #canvasArea{
 
         min-width: 100%;
-
+        min-height: fit-content;
 
     }
 
 
     canvas{
-        height:500px;
-        border: 2px black solid ;
+
+        width: 600px;
+
+        height: 600px;
     }
 
 
@@ -163,6 +183,13 @@ background-color: beige;
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 850px) {
 
+
+    canvas{
+
+
+        width: 600px;
+
+    }
 /*
 
 
@@ -269,9 +296,7 @@ nav {
 */
 .testclick {
 
-    border: 2px black solid ;
     max-width: 200px;
-
 
 
 }
@@ -279,8 +304,6 @@ nav {
 
 #mainBody {
 
-    border: 2px black solid ;
-    max-height: 85vh;
     background-color: azure;
     display: flex;
     flex-wrap: nowrap;
@@ -290,7 +313,7 @@ nav {
 }
 
 #imageChoice {
-    border: 2px black solid ;
+
     min-height: 100%;
     min-width: 175px;
     max-width: 20vw;
@@ -298,12 +321,12 @@ nav {
     flex-direction: column;
     background-color: aqua;
     align-items: center;
-    overflow-y: scroll;
+    overflow: auto;
     gap: 10px;
 }
 
 #canvasArea {
-    border: 2px black solid ;
+
     margin-left: auto;
     margin-right: auto;
     min-height: fit-content;
@@ -311,7 +334,6 @@ nav {
     background-color: lightblue;
 
     display: flex;
-
     justify-content: center;
     padding: 10px;
     max-width: 70%;
@@ -348,10 +370,16 @@ nav {
 
         max-width: 70%;
         min-width: 70%;
-        border: 2px black solid ;
+
     
     }
 
+    canvas{
+
+        width: 700px;
+        height: 700px;
+
+    }
 
 
 
@@ -377,6 +405,7 @@ nav {
 
     }
 
+
     #canvasArea {
         margin-left: auto;
         margin-right: auto;
@@ -390,7 +419,7 @@ nav {
 
         max-width: 70%;
         min-width: 70%;
-    border: 2px black solid ;
+
     
     }
 
