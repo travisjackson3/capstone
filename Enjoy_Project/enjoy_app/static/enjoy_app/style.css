@@ -186,17 +186,12 @@ canvas{
 
     canvas{
 
-
         width: 600px;
+        height: 700px;
+        border: black solid 2px;
 
     }
 /*
-
-
-
-
-
-
 
 
     .testclick {
