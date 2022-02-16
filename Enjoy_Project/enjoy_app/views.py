@@ -18,10 +18,10 @@ def index(request):
     ### image loading test
     ### just send string of locations on post????
 
-    testImage  = ImageLibrary.objects.get(image_name = "world")
+    testImage  = ImageLibrary.objects.get(image_name = "mandala1")
     testImage2 = ImageLibrary.objects.get(image_name = "mandala2")
-    testImage3 = ImageLibrary.objects.get(image_name = "wolf")
-    testImage4 = ImageLibrary.objects.get(image_name = "blossom")
+    testImage3 = ImageLibrary.objects.get(image_name = "mandala3")
+    testImage4 = ImageLibrary.objects.get(image_name = "mandala4")
 
 
 

@@ -1,25 +1,23 @@
-
+let x = 0
+let y = 0
+let isDrawing = false
+let colorSelect = "black"
 
 
 var image = new Image();
-
-const testClick = document.querySelectorAll('.testclick');
+const drawPickSel = document.querySelectorAll('.drawPickSel');
 let canvas = document.getElementById("colorCanvas");
 let ctx = canvas.getContext("2d");
-let testchange = document.getElementById("testchange")
+
+let redButton = document.getElementById("redSelect")
+let blackButton = document.getElementById("blackSelect")
+
+let sizeWidthDraw = document.getElementById("sizeRange")
 
 
-console.log(canvas.width)
-console.log(canvas.height)
+sizeWidthDraw.addEventListener("change", function(){
 
-
-let rect = canvas.getBoundingClientRect();
-
-window.addEventListener("resize",function(e){
-
-
-  rect = canvas.getBoundingClientRect();
-
+sizeWidthDraw = document.getElementById("sizeRange").value
 
 
 })
@@ -29,49 +27,85 @@ window.addEventListener("resize",function(e){
 
 
 
+
+
+redButton.addEventListener("click", function(e){
+
+colorSelect = "red"
+
+})
+
+blackButton.addEventListener("click", function(e){
+
+  colorSelect = "black"
+  
+  })
+
+
+
+//
+// finds correct size of canvas based on window size.
+//display size affects accuracy of draw
+//returns correct canvas width and height
+//
+resizeCanvas(canvas)
+function resizeCanvas(canvas) {
+
+  let trueWidth = canvas.clientHeight;
+  let trueHeight = canvas.clientWidth;
+
+  if (canvas.width !== trueWidth || canvas.height !== trueHeight)
+
+
+    canvas.width = trueWidth;
+    canvas.height = trueHeight
+
+    
+console.log(canvas.width)
+console.log(canvas.height)
+
+}
+
+
+
+
+//Fills canvas with white background
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height)
 
 
 
+//
+//checks for window resize
+//resizes the canvas size and width
+//finds new position of the canvas
+//
+window.addEventListener("resize",function(e){
+
+resizeCanvas(canvas)
+
+
+console.log(canvas.width)
+console.log(canvas.height)
+
+})
 
 
 
 
+//
+//Creates event to display the image on the canvas the user selects
+//
+drawPickSel.forEach(element => element.addEventListener('click', event => {
 
-
-/* let testclick = document.getElementsByClassName("#testclick")
-
-
-testclick.addEventListener("click", function(){
-  let testchange = document.querySelector("#testchange")
-    console.log("testclick")
-    //testclick.setAttribute("src", this.name)
-    console.log(this.name)
-    
-    for (var i=0; i < testclick.length; i++) {
-
-        testclick[i].setAttribute("src", this.name)
-
-    }
-
-
-}) */
-
-
-
-//let testchange = document.getElementById("#test")
-
-
-testClick.forEach(element => element.addEventListener('click', event => {
-
+  resizeCanvas(canvas)
+  
+  let ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   //testchange = document.getElementById("testchange")
-
-
 
 
   let img = document.createElement("img");
@@ -84,67 +118,125 @@ testClick.forEach(element => element.addEventListener('click', event => {
 
 }));
 
-let x = 0
-let y = 0
-
-canvas.addEventListener("click", function(e) {
-
-  x = e.clientX - rect.left;
-  y = e.clientY - rect.top;
-  //  getMousePosition(canvas, e)
 
 
+//
+//Click event to draw on canvas
+//
+//canvas.addEventListener("click", function (e) {
 
-    ctx.beginPath()
-  
-    ctx.fillStyle = "black"
-    ctx.fillRect(x, y, 10, 10)
-    console.log("Coordinate x: " + x,
-    "Coordinate y: " + y,
-    "page x: " + e.clientX,
-    "page y: " + e.clientY,
-    "rect left: " + rect.left,
-    "rect top: " + rect.top,
-  )
-   
-  
+ // resizeCanvas(canvas)
+ 
+ // getMousePosition(e)
+  //drawFunction(e)
+
+//})
 
 
 
-})
 
+
+
+canvas.addEventListener('mousedown', e => {
+  getMousePosition(e)
+
+  isDrawing = true;
+
+});
+
+canvas.addEventListener('mousemove', e => {
+  if (isDrawing === true) {
+
+    drawLine(ctx, x, y, e.offsetX, e.offsetY);
+    getMousePosition(e)
+
+  }
+});
+
+window.addEventListener('mouseup', e => {
+  if (isDrawing === true) {
+    drawLine(ctx, x, y, e.offsetX, e.offsetY);
+    x = 0;
+    y = 0;
+    isDrawing = false;
+  }
+});
+
+
+
+
+
+
+
+
+
+function drawLine(ctx, x1, y1, x2, y2) {
+  ctx.beginPath();
+  ctx.strokeStyle = colorSelect;
+
+
+  ctx.lineWidth = sizeWidthDraw;
+  ctx.lineCap = "round"
+  ctx.lineJoin ="round"
+
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+
+
+
+  ctx.stroke();
+  ctx.closePath();
+}
+
+
+
+
+
+//
+//function pencilShape(){
+
+
+ // pencil = new Path2D()
+
+ // pencil.arc(x, y, 25, 0, 2 * Math.PI)
+
+ // return pencil
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//test draw square on canvas
+//
 function drawFunction(e) {
-  x = e.clientX - rect.left;
-  y = e.clientY - rect.top;
-  //  getMousePosition(canvas, e)
 
+  ctx.beginPath()
 
+  ctx.fillStyle = "black"
+  ctx.fillRect(x, y, 10, 10)
 
-    ctx.beginPath()
-  
-    ctx.fillStyle = "black"
-    ctx.fillRect(x, y, 10, 10)
-    console.log("Coordinate x: " + x,
-    "Coordinate y: " + y,
-    "page x: " + e.clientX,
-    "page y: " + e.clientY,
-    "rect left: " + rect.left,
-    "rect top: " + rect.top,
-  )
-   
-  
 
 }
 
-function getMousePosition(canvas, e) {
-  let rect = canvas.getBoundingClientRect();
-  x = e.clientX - rect.left;
-  y = e.clientY - rect.top;
+
+
+function getMousePosition(e) {
+
+    x = e.offsetX
+    y = e.offsetY
+
   console.log("Coordinate x: " + x,
     "Coordinate y: " + y,
-    "page x: " + e.clientX,
-    "page y: " + e.clientY);
-
+  )
   return x, y
 }
 
@@ -179,3 +271,32 @@ function getMousePosition(canvas, e) {
     e.target.appendChild(img);
   });
  */
+
+
+
+
+
+
+
+  
+/* let testclick = document.getElementsByClassName("#testclick")
+ 
+ 
+testclick.addEventListener("click", function(){
+  let testchange = document.querySelector("#testchange")
+    console.log("testclick")
+    //testclick.setAttribute("src", this.name)
+    console.log(this.name)
+    
+    for (var i=0; i < testclick.length; i++) {
+ 
+        testclick[i].setAttribute("src", this.name)
+ 
+    }
+ 
+ 
+}) */
+
+
+
+//let testchange = document.getElementById("#test")

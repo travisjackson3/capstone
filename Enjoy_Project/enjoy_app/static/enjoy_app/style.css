@@ -88,7 +88,7 @@ nav {
     gap: 10px;
 
 
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 .testclick {
@@ -122,8 +122,9 @@ background-color: beige;
 
 canvas{
 
-    width: 310px;
-    height: 310px;
+    width: 200px;
+    height: 200px;
+    cursor: crosshair;
 
 }
 @media only screen and (min-width: 420px) {
@@ -187,7 +188,7 @@ canvas{
     canvas{
 
         width: 600px;
-        height: 700px;
+        height: 600px;
         border: black solid 2px;
 
     }
@@ -364,15 +365,15 @@ nav {
         justify-content: center;
 
         max-width: 70%;
-        min-width: 70%;
+        min-width: fit-content;
 
     
     }
 
     canvas{
 
-        width: 700px;
-        height: 700px;
+        width: 800px;
+        height: 800px;
 
     }
 
