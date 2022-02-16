@@ -91,7 +91,7 @@ nav {
     overflow-x: auto;
 }
 
-.testclick {
+.drawPickSel {
     max-height: 100px;
 }
 
@@ -195,7 +195,7 @@ canvas{
 /*
 
 
-    .testclick {
+    .drawPickSel {
         max-height: 100px;
     }
 
@@ -262,7 +262,7 @@ nav {
     gap: 10px;
 }
 
-.testclick {
+.drawPickSel {
     border: 2px black solid ;
     max-width: 200px;
 
@@ -290,7 +290,7 @@ nav {
 }
 
 */
-.testclick {
+.drawPickSel {
 
     max-width: 200px;
 
@@ -377,10 +377,61 @@ nav {
 
     }
 
+    .palletButton {
+        border: black solid 1px;
 
+            padding: 15px 32px;
+     
 
+      }
 
+      #redSelect{
 
+        background-color: red;
+
+      }
+
+      #blackSelect{
+
+        background-color: black;
+
+      }
+
+      #blueSelect{
+
+        background-color: blue;
+
+      }
+      #yellowSelect{
+
+        background-color: yellow;
+
+      }
+      #greenSelect{
+
+        background-color: green;
+
+      }
+      #pinkSelect{
+
+        background-color: pink;
+
+      }
+      #whiteSelect{
+
+        background-color: white;
+
+      }
+      #greySelect{
+
+        background-color: grey;
+
+      }
+      #orangeSelect{
+
+        background-color: orange;
+
+      }
 
 
     h1 {

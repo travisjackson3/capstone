@@ -11,6 +11,13 @@ let ctx = canvas.getContext("2d");
 
 let redButton = document.getElementById("redSelect")
 let blackButton = document.getElementById("blackSelect")
+let blueButton = document.getElementById("blueSelect")
+let yellowButton = document.getElementById("yellowSelect")
+let greenButton = document.getElementById("greenSelect")
+let pinkButton = document.getElementById("pinkSelect")
+let whiteButton = document.getElementById("whiteSelect")
+let greyButton = document.getElementById("greySelect")
+let orangeButton = document.getElementById("orangeSelect")
 
 let sizeWidthDraw = document.getElementById("sizeRange")
 
@@ -41,6 +48,49 @@ blackButton.addEventListener("click", function(e){
   
   })
 
+blueButton.addEventListener("click", function(e){
+
+colorSelect = "blue"
+
+})
+
+yellowButton.addEventListener("click", function(e){
+
+colorSelect = "yellow"
+
+})
+
+greenButton.addEventListener("click", function(e){
+
+colorSelect = "green"
+
+})
+
+pinkButton.addEventListener("click", function(e){
+
+colorSelect = "pink"
+
+})
+
+whiteButton.addEventListener("click", function(e){
+
+colorSelect = "white"
+
+})
+
+greyButton.addEventListener("click", function(e){
+
+colorSelect = "grey"
+
+})
+
+orangeButton.addEventListener("click", function(e){
+
+  colorSelect = "orange"
+  
+  })
+           
+            
 
 
 //

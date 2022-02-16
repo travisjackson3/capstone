@@ -18,10 +18,10 @@ def index(request):
     ### image loading test
     ### just send string of locations on post????
 
-    testImage  = ImageLibrary.objects.get(image_name = "mandala1")
-    testImage2 = ImageLibrary.objects.get(image_name = "mandala2")
-    testImage3 = ImageLibrary.objects.get(image_name = "mandala3")
-    testImage4 = ImageLibrary.objects.get(image_name = "mandala4")
+    image1  = ImageLibrary.objects.get(image_name = "mandala1")
+    image2 = ImageLibrary.objects.get(image_name = "mandala2")
+    image3 = ImageLibrary.objects.get(image_name = "mandala3")
+    image4 = ImageLibrary.objects.get(image_name = "mandala4")
 
 
 
@@ -40,11 +40,7 @@ def index(request):
    # testing.close()
 
 
-    context = {"test": [1,2,3], "image": [testImage, testImage2, testImage3, testImage4]}
-   # context = {"imagetest": testImage}
-
-    print(context)
-
+    context = {"image": [image1, image2, image3, image4]}
 
     return render(request, "enjoy_app/index.html", context)
 
