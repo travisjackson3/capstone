@@ -4,6 +4,7 @@ let isDrawing = false
 let colorSelect = "black"
 let brushSize = 5
 var image = new Image();
+let eraseOn = false
 
 
 const drawPickSel = document.querySelectorAll('.drawPickSel');
@@ -22,6 +23,24 @@ const canvasCursor = document.getElementById("canvasLayerCursor");
 const ctxCursor = canvasCursor.getContext("2d");
 
 
+//erase
+let eraseSelect = document.getElementById("eraseSelect")
+
+
+eraseSelect.addEventListener("click", function(){
+  
+  if (eraseOn === true){
+
+    eraseOn = false
+    console.log(eraseOn)
+  }
+  else if(eraseOn === false){
+    eraseOn = true
+
+    console.log(eraseOn)
+  }
+
+})
 
 
 
@@ -45,87 +64,72 @@ let sizeWidthDraw = document.getElementById("sizeRange")
 
 
 
-console.log(canvasBack.width)
-console.log(canvasBack.height)
-console.log(canvasDraw.width)
-console.log(canvasDraw.height)
-
-
-
-
-
-
-
-sizeWidthDraw.addEventListener("change", function(){
-
-
-  brushSize  = document.getElementById("sizeRange").value
-
-
-})
-
-
-
-
-
-
-
-
 redButton.addEventListener("click", function(e){
 
 colorSelect = "hsla(316, 96%, 63%, 1.0)"
+eraseOn = false
 
 })
 
 blackButton.addEventListener("click", function(e){
 
   colorSelect = "black"
+  eraseOn = false
   
   })
 
 blueButton.addEventListener("click", function(e){
 
 colorSelect = "blue"
+eraseOn = false
 
 })
 
 yellowButton.addEventListener("click", function(e){
 
 colorSelect = "yellow"
+eraseOn = false
 
 })
 
 greenButton.addEventListener("click", function(e){
 
 colorSelect = "green"
+eraseOn = false
 
 })
 
 pinkButton.addEventListener("click", function(e){
 
 colorSelect = "pink"
+eraseOn = false
 
 })
 
 whiteButton.addEventListener("click", function(e){
 
 colorSelect = "white"
+eraseOn = false
 
 })
 
 greyButton.addEventListener("click", function(e){
 
 colorSelect = "grey"
+eraseOn = false
 
 })
 
 orangeButton.addEventListener("click", function(e){
 
   colorSelect = "orange"
+  eraseOn = false
   
   })
            
-            
+
+  
+
 
 
 //
@@ -208,6 +212,15 @@ drawPickSel.forEach(element => element.addEventListener('click', event => {
 
 
 
+//
+//checks for change of the brush size html range input
+//
+sizeWidthDraw.addEventListener("change", function(){
+
+brushSize  = document.getElementById("sizeRange").value
+
+})
+
 
 
 
@@ -218,30 +231,40 @@ canvasCursor.addEventListener('mousedown', e => {
   isDrawing = true;
 
 });
-
 canvasCursor.addEventListener('mousemove', e => {
 
   
   if (isDrawing === true) {
+    
+    if (eraseOn === false){
 
-    drawLine(ctxDraw, x, y, e.offsetX, e.offsetY);
+      drawLine(ctxDraw, x, y, e.offsetX, e.offsetY);
+      getMousePosition(e)
+    }
+    else if(eraseOn === true){
 
-
-    getMousePosition(e)
-
+      startErase(ctxDraw, x, y, e.offsetX, e.offsetY)
+      getMousePosition(e)
+      
+    ctxCursor.clearRect(0, 0, canvasCursor.width, canvasCursor.height)
+    }
   }
 
+  //
   //Adds a cursor outline, size and color indication
+  //
   else if (isDrawing === false) {
 
     ctxCursor.clearRect(0, 0, canvasCursor.width, canvasCursor.height)
     brushOutline(ctxCursor, e.offsetX, e.offsetY)
 
-  }
-  
+  }  
 });
 
+
+//
 //removes the cursor outline when mouse leaves canvas area
+//
 canvasCursor.addEventListener("mouseleave", function(){
 ctxCursor.clearRect(0, 0, canvasCursor.width, canvasCursor.height)
 
@@ -252,11 +275,26 @@ ctxCursor.clearRect(0, 0, canvasCursor.width, canvasCursor.height)
 window.addEventListener('mouseup', e => {
 
   if (isDrawing === true) {
-    drawLine(ctxCursor, x, y, e.offsetX, e.offsetY);
-    x = 0;
-    y = 0;
-    isDrawing = false;
+
+    if (eraseOn === false){
+       drawLine(ctxCursor, x, y, e.offsetX, e.offsetY);
+    }
+
+    else if (eraseOn === true){
+
+      startErase(ctxDraw, x, y, e.offsetX, e.offsetY)
+
+    }
+
+
   }
+
+
+
+  x = 0;
+  y = 0;
+  isDrawing = false;
+
 });
 
 
@@ -264,7 +302,10 @@ window.addEventListener('mouseup', e => {
 
 
 function drawLine(ctxDraw, x1, y1, x2, y2) {
+
   ctxDraw.beginPath();
+  ctxDraw.globalCompositeOperation="source-over"
+
   ctxDraw.strokeStyle = colorSelect;
 
   ctxDraw.lineWidth = brushSize;
@@ -313,6 +354,28 @@ function brushOutline(ctxCursor, x, y){
 
 
 
+function startErase(ctxDraw, x1, y1, x2, y2){
+
+  ctxDraw.beginPath();
+  ctxDraw.globalCompositeOperation="destination-out"
+  ctxDraw.strokeStyle = colorSelect;
+
+  ctxDraw.lineWidth = brushSize;
+  ctxDraw.lineCap = "round"
+  ctxDraw.lineJoin ="round"
+
+  ctxDraw.moveTo(x1, y1);
+  ctxDraw.lineTo(x2, y2);
+
+
+
+  ctxDraw.stroke();
+  ctxDraw.closePath();
+
+
+}
+
+
 
 //
 //gets mouse postion on canvas
@@ -347,21 +410,6 @@ return x, y
 
  // return pencil
 //}
-
-
-//
-//test draw square on canvasBack
-//
-function drawFunction(e) {
-
-  ctxBack.beginPath()
-
-  ctxBack.fillStyle = "black"
-  ctxBack.fillRect(x, y, 10, 10)
-
-
-}
-
 
 
 
