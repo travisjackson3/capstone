@@ -2,13 +2,31 @@ let x = 0
 let y = 0
 let isDrawing = false
 let colorSelect = "black"
-
-
+let brushSize = 5
 var image = new Image();
-const drawPickSel = document.querySelectorAll('.drawPickSel');
-let canvas = document.getElementById("colorCanvas");
-let ctx = canvas.getContext("2d");
 
+
+const drawPickSel = document.querySelectorAll('.drawPickSel');
+
+//background layer. bottom layer
+const canvasBack = document.getElementById("canvasLayerBack");
+const ctxBack = canvasBack.getContext("2d");
+
+//draw on layer middle layer
+const canvasDraw = document.getElementById("canvasLayerDraw");
+const ctxDraw = canvasDraw.getContext("2d");
+
+//cursor layer top layer
+//this layer must transfer drawing onto draw layer
+const canvasCursor = document.getElementById("canvasLayerCursor");
+const ctxCursor = canvasCursor.getContext("2d");
+
+
+
+
+
+
+//color buttons. automate later if time
 let redButton = document.getElementById("redSelect")
 let blackButton = document.getElementById("blackSelect")
 let blueButton = document.getElementById("blueSelect")
@@ -19,12 +37,29 @@ let whiteButton = document.getElementById("whiteSelect")
 let greyButton = document.getElementById("greySelect")
 let orangeButton = document.getElementById("orangeSelect")
 
+
+
 let sizeWidthDraw = document.getElementById("sizeRange")
+
+
+
+
+
+console.log(canvasBack.width)
+console.log(canvasBack.height)
+console.log(canvasDraw.width)
+console.log(canvasDraw.height)
+
+
+
+
+
 
 
 sizeWidthDraw.addEventListener("change", function(){
 
-sizeWidthDraw = document.getElementById("sizeRange").value
+
+  brushSize  = document.getElementById("sizeRange").value
 
 
 })
@@ -38,7 +73,7 @@ sizeWidthDraw = document.getElementById("sizeRange").value
 
 redButton.addEventListener("click", function(e){
 
-colorSelect = "red"
+colorSelect = "hsla(316, 96%, 63%, 1.0)"
 
 })
 
@@ -94,118 +129,130 @@ orangeButton.addEventListener("click", function(e){
 
 
 //
-// finds correct size of canvas based on window size.
+// finds correct size of canvasBack based on window size.
 //display size affects accuracy of draw
-//returns correct canvas width and height
+//returns correct canvasBack width and height
 //
-resizeCanvas(canvas)
-function resizeCanvas(canvas) {
+resizeCanvas(canvasBack)
+function resizeCanvas(canvasBack) {
 
-  let trueWidth = canvas.clientHeight;
-  let trueHeight = canvas.clientWidth;
-
-  if (canvas.width !== trueWidth || canvas.height !== trueHeight)
+  let trueWidth = canvasBack.clientHeight;
+  let trueHeight = canvasBack.clientWidth;
 
 
-    canvas.width = trueWidth;
-    canvas.height = trueHeight
+  if (canvasBack.width !== trueWidth || canvasBack.height !== trueHeight)
 
-    
-console.log(canvas.width)
-console.log(canvas.height)
+
+    canvasBack.width = trueWidth;
+    canvasBack.height = trueHeight
+    canvasDraw.width = trueWidth
+    canvasDraw.height = trueHeight
+    canvasCursor.width = trueWidth;
+    canvasCursor.height = trueHeight
+
+
+
 
 }
 
-
-
-
-//Fills canvas with white background
-ctx.fillStyle = "white";
-ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-
-
 //
 //checks for window resize
-//resizes the canvas size and width
-//finds new position of the canvas
+//resizes the canvasBack size and width
+//finds new position of the canvasBack
 //
 window.addEventListener("resize",function(e){
 
-resizeCanvas(canvas)
+  resizeCanvas(canvasBack)
+  
+  
+  console.log(canvasBack.width)
+  console.log(canvasBack.height)
+  
+  })
 
 
-console.log(canvas.width)
-console.log(canvas.height)
 
-})
+
+//Fills canvasBack with white background
+ctxBack.fillStyle = "white";
+ctxBack.fillRect(0, 0, canvasBack.width, canvasBack.height)
 
 
 
 
 //
-//Creates event to display the image on the canvas the user selects
+//Creates event to display the image on the canvasBack the user selects
 //
 drawPickSel.forEach(element => element.addEventListener('click', event => {
 
-  resizeCanvas(canvas)
-  
-  let ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  resizeCanvas(canvasBack)
+  data = element.dataset;
 
-  ctx.fillStyle = "white";
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  let ctxBack = canvasBack.getContext("2d");
+  ctxBack.clearRect(0, 0, canvasBack.width, canvasBack.height);
+
+  ctxBack.fillStyle = "white";
+  ctxBack.fillRect(0, 0, canvasBack.width, canvasBack.height)
   //testchange = document.getElementById("testchange")
 
-
+  
   let img = document.createElement("img");
-  img.src = element.id;
+  img.src = data.fileloc
 
   //testchange.setAttribute("src", element.id)
 
-  img.onload = function () { ctx.drawImage(img, 0, 0, img.width, img.height) }
+  img.onload = function () { ctxBack.drawImage(img, 0, 0, img.width, img.height) }
 
 
 }));
 
 
 
-//
-//Click event to draw on canvas
-//
-//canvas.addEventListener("click", function (e) {
-
- // resizeCanvas(canvas)
- 
- // getMousePosition(e)
-  //drawFunction(e)
-
-//})
 
 
 
 
-
-
-canvas.addEventListener('mousedown', e => {
+canvasCursor.addEventListener('mousedown', e => {
   getMousePosition(e)
 
   isDrawing = true;
 
 });
 
-canvas.addEventListener('mousemove', e => {
+canvasCursor.addEventListener('mousemove', e => {
+
+  
   if (isDrawing === true) {
 
-    drawLine(ctx, x, y, e.offsetX, e.offsetY);
+    drawLine(ctxDraw, x, y, e.offsetX, e.offsetY);
+
+
     getMousePosition(e)
 
   }
+
+  //Adds a cursor outline, size and color indication
+  else if (isDrawing === false) {
+
+    ctxCursor.clearRect(0, 0, canvasCursor.width, canvasCursor.height)
+    brushOutline(ctxCursor, e.offsetX, e.offsetY)
+
+  }
+  
 });
 
+//removes the cursor outline when mouse leaves canvas area
+canvasCursor.addEventListener("mouseleave", function(){
+ctxCursor.clearRect(0, 0, canvasCursor.width, canvasCursor.height)
+
+
+})
+
+
 window.addEventListener('mouseup', e => {
+
   if (isDrawing === true) {
-    drawLine(ctx, x, y, e.offsetX, e.offsetY);
+    drawLine(ctxCursor, x, y, e.offsetX, e.offsetY);
     x = 0;
     y = 0;
     isDrawing = false;
@@ -216,27 +263,75 @@ window.addEventListener('mouseup', e => {
 
 
 
+function drawLine(ctxDraw, x1, y1, x2, y2) {
+  ctxDraw.beginPath();
+  ctxDraw.strokeStyle = colorSelect;
+
+  ctxDraw.lineWidth = brushSize;
+  ctxDraw.lineCap = "round"
+  ctxDraw.lineJoin ="round"
+
+  ctxDraw.moveTo(x1, y1);
+  ctxDraw.lineTo(x2, y2);
 
 
 
-
-function drawLine(ctx, x1, y1, x2, y2) {
-  ctx.beginPath();
-  ctx.strokeStyle = colorSelect;
-
-
-  ctx.lineWidth = sizeWidthDraw;
-  ctx.lineCap = "round"
-  ctx.lineJoin ="round"
-
-  ctx.moveTo(x1, y1);
-  ctx.lineTo(x2, y2);
-
-
-
-  ctx.stroke();
-  ctx.closePath();
+  ctxDraw.stroke();
+  ctxDraw.closePath();
 }
+
+
+
+//
+//makes an outline of brush size and color
+//
+function brushOutline(ctxCursor, x, y){
+
+  
+  let outlineSize = brushSize
+  
+  //color of brush
+  //lighten. lower alpha to 0.6 "alpha" hsla(hue, saturation, lightness, alpha)
+ // colorSelect = "hsla(316, 96%, 63%, 1.0)"
+
+ let currentColorSelect = colorSelect 
+ let testnew = currentColorSelect.slice(0, 20)
+ testfinal = testnew.concat("0.6)")
+
+
+  ctxCursor.beginPath();
+
+  ctxCursor.strokeStyle = colorSelect
+  ctxCursor.lineWidth = 2;
+
+  ctxCursor.arc(x, y, (outlineSize/2), 0, 2 * Math.PI);
+
+  ctxCursor.stroke();
+  ctxCursor.closePath();
+}
+
+
+
+
+
+//
+//gets mouse postion on canvas
+//
+function getMousePosition(e) {
+
+  x = e.offsetX
+  y = e.offsetY
+
+return x, y
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -254,46 +349,18 @@ function drawLine(ctx, x1, y1, x2, y2) {
 //}
 
 
-
-
-
-
-
-
-
-
-
-
 //
-//test draw square on canvas
+//test draw square on canvasBack
 //
 function drawFunction(e) {
 
-  ctx.beginPath()
+  ctxBack.beginPath()
 
-  ctx.fillStyle = "black"
-  ctx.fillRect(x, y, 10, 10)
+  ctxBack.fillStyle = "black"
+  ctxBack.fillRect(x, y, 10, 10)
 
 
 }
-
-
-
-function getMousePosition(e) {
-
-    x = e.offsetX
-    y = e.offsetY
-
-  console.log("Coordinate x: " + x,
-    "Coordinate y: " + y,
-  )
-  return x, y
-}
-
-
-
-
-
 
 
 
@@ -350,3 +417,18 @@ testclick.addEventListener("click", function(){
 
 
 //let testchange = document.getElementById("#test")
+
+
+
+
+//
+//Click event to draw on canvasBack
+//
+//canvasBack.addEventListener("click", function (e) {
+
+ // resizeCanvas(canvasBack)
+ 
+ // getMousePosition(e)
+  //drawFunction(e)
+
+//})

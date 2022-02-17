@@ -33,13 +33,13 @@
 
             {% for img in image %}
 
-            <img class="drawPickSel" src="{{ img.thumbnail_image_location }}" id="{{ img.image_location }}" />
+            <img class="drawPickSel" src="{{ img.thumbnail_image_location }}" data-fileLoc="{{ img.image_location }}" />
             {% endfor %}
 
         </div>
 
         <div>
-
+            <!-- change to forloop if time permits-->
             <button class="palletButton" id="redSelect"></button>
             <button class="palletButton" id="blackSelect"></button>
             <button class="palletButton" id="blueSelect"></button>
@@ -59,13 +59,19 @@
 
         <div id="canvasArea">
 
-
-            <canvas id="colorCanvas" >
-                Browser not supported.
+            <div id="canvasLayers"> 
+                
+           <canvas class= "canvases" id="canvasLayerBack" >
+                This text displayed if browser does not support HTML5 Canvas
             </canvas>
-         <!--   <canvas id="colorPallet"></canvas>
-            <canvas id="colorOptions"></canvas>
-         -->
+            <canvas class= "canvases" id="canvasLayerDraw" >  
+            </canvas>
+
+            <canvas class= "canvases" id="canvasLayerCursor" >
+            </canvas>
+
+
+            </div>
         </div>
 
     </div>

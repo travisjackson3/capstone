@@ -120,7 +120,7 @@ background-color: beige;
 }
 
 
-canvas{
+.canvases{
 
     width: 200px;
     height: 200px;
@@ -129,7 +129,7 @@ canvas{
 }
 @media only screen and (min-width: 420px) {
 
-    canvas{
+    .canvases{
 
         width: 400px;
         height: 400px;
@@ -139,13 +139,24 @@ canvas{
 
 @media only screen and (min-width: 500px) {
 
-    canvas{
+    .canvases{
 
         width: 400px;
         height: 400px;
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 625px) {
@@ -165,7 +176,7 @@ canvas{
     }
 
 
-    canvas{
+    .canvases{
 
         width: 600px;
 
@@ -185,7 +196,7 @@ canvas{
 @media only screen and (min-width: 850px) {
 
 
-    canvas{
+    .canvases{
 
         width: 600px;
         height: 600px;
@@ -217,7 +228,7 @@ canvas{
 
     }
 
-    canvas{
+    canvases{
         height:500px;
         border: 2px black solid ;
     }
@@ -351,15 +362,29 @@ nav {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
 
+    #canvasLayers{
 
+        position: relative;
+    }
+
+
+
+    .canvases{
+        width: 800px;
+        height: 800px;
+        min-height: fit-content;
+ 
+
+
+    }
     #canvasArea {
 
         margin-left: auto;
         margin-right: auto;
         min-height: fit-content;
-    
+        position: relative;
         background-color: lightblue;
-    
+
         display: flex;
         padding: 20px;
         justify-content: center;
@@ -370,13 +395,39 @@ nav {
     
     }
 
-    canvas{
+    #canvasLayerBack{
 
-        width: 800px;
+        z-index: 1;
         height: 800px;
+        width: 800px;
 
+    
+    }
+    
+    #canvasLayerDraw{
+    
+        z-index: 2;
+        position: absolute;
+        left: 0px;
+        top:0px;
+
+        height: 800px;
+        width: 800px;
+    
+    }
+    
+    #canvasLayerCursor{
+    
+        z-index: 3;
+
+        position: absolute;
+        left: 0px;
+        top:0px; 
+        height: 800px;
+        width: 800px;
     }
 
+   
     .palletButton {
         border: black solid 1px;
 
@@ -434,9 +485,16 @@ nav {
       }
 
 
-    h1 {
-        text-align: center;
-    }
+
+
+
+
+
+
+
+
+
+
 }
 
 
