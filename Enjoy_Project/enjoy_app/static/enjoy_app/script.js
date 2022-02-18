@@ -6,12 +6,13 @@ let brushSize = 5
 var image = new Image();
 let eraseOn = false
 
-let imageSave = new Image
+let imageSaveRedo = new Image
 let imageRedo = new Image
+let imageSave = new Image
 
 let allowRedo = false
 
-//let imageSave = document.createElement("img")
+//let imageSaveRedo = document.createElement("img")
 
 
 const drawPickSel = document.querySelectorAll('.drawPickSel');
@@ -30,9 +31,9 @@ const canvasCursor = document.getElementById("canvasLayerCursor");
 const ctxCursor = canvasCursor.getContext("2d");
 
 
-//save data for canvas to undo later
-let saveStateCanvass = document.createElement("canvas")
-let ctxSaveState = saveStateCanvass.getContext("2d")
+//save data to download or save to user database
+let saveStateCanvas = document.createElement("canvas")
+let ctxSaveState = saveStateCanvas.getContext("2d")
 
 
 //erase
@@ -44,10 +45,8 @@ let undoSelect = document.getElementById("undoButton")
 //redo
 let redoSelect = document.getElementById("redoButton")
 
-
-
-
-
+//download
+let downloadSelect = document.getElementById("downloadButton")
 
 
 
@@ -90,8 +89,8 @@ function resizeCanvas(canvasBack) {
     canvasCursor.width = trueWidth;
     canvasCursor.height = trueHeight
 
-    saveStateCanvass = trueWidth
-    saveStateCanvass = trueHeight
+    saveStateCanvas.width = trueWidth
+   saveStateCanvas.height = trueHeight
 
 
 
@@ -171,7 +170,7 @@ canvasCursor.addEventListener('mousedown', e => {
 
   
   let test = canvasDraw.toDataURL("image/png")
-  imageSave.src = test
+  imageSaveRedo.src = test
 
   undoSelect.disabled = false
   redoSelect.disabled = true
@@ -230,7 +229,6 @@ window.addEventListener('mouseup', e => {
       startErase(ctxDraw, x, y, e.offsetX, e.offsetY)
       ctxDraw.globalCompositeOperation="source-over"
 
-
     }
   }
 
@@ -251,21 +249,21 @@ window.addEventListener('mouseup', e => {
   //saveDrawCtx(ctxDraw)
 
 
- // imageSave.width = canvasDraw.width
- // imageSave.height = canvasDraw.height
- // console.log(imageSave)
- // imageSave = ctxSaveState.drawImage(canvasDraw, 0, 0)
+ // imageSaveRedo.width = canvasDraw.width
+ // imageSaveRedo.height = canvasDraw.height
+ // console.log(imageSaveRedo)
+ // imageSaveRedo = ctxSaveState.drawImage(canvasDraw, 0, 0)
 
-  //console.log(imageSave)
+  //console.log(imageSaveRedo)
   //ctxSaveState.drawImage(canvasDraw, 0, 0)
-  //imageSave =  ctxSaveState.drawImage(canvasDraw, 0, 0)
+  //imageSaveRedo =  ctxSaveState.drawImage(canvasDraw, 0, 0)
  
 
 
 
   // let test = canvasDraw.toDataURL("image/png")
 
- //   imageSave.src = test
+ //   imageSaveRedo.src = test
 
 
 
@@ -282,16 +280,18 @@ undoSelect.addEventListener("click", function(){
 
 
  // ctxDraw = saveStateCanvass.getContext("2d")
- //imageSave = ctxSaveState.drawImage(canvasDraw, 0, 0)
+ //imageSaveRedo = ctxSaveState.drawImage(canvasDraw, 0, 0)
  //ctxSaveState.drawImage(canvasDraw, 0, 0)
  
   //test = canvasDraw.toDataURL("image/png")
 
   //let test = canvasDraw.toDataURL("image/png")
+
+
   let redoSave = canvasDraw.toDataURL("image/png")
   imageRedo.src = redoSave
 
-//    imageSave.src = test
+//    imageSaveRedo.src = test
   //document.getElementById()
   //imgtest = test.url
 
@@ -299,7 +299,7 @@ undoSelect.addEventListener("click", function(){
 
   ctxDraw.clearRect(0, 0, canvasDraw.width, canvasDraw.height)
 
-  ctxDraw.drawImage(imageSave, 0, 0)
+  ctxDraw.drawImage(imageSaveRedo, 0, 0)
 
   //let redoSave = canvasDraw.toDataURL("image/png")
  // imageRedo.src = redoSave
@@ -362,7 +362,7 @@ eraseSelect.addEventListener("click", function(){
   }
 
   //let test = canvasDraw.toDataURL("image/png")
-  //imageSave.src = test
+  //imageSaveRedo.src = test
 
 })
 
@@ -468,38 +468,62 @@ return x, y
 }
 
 
-//function saveDrawCtx(ctxDraw){
-  
+downloadSelect.addEventListener("click", function(e){
+ // console.log("save")
+ // ctxSaveState.drawImage(canvasBack, 0, 0)
+ // ctxSaveState.drawImage(canvasDraw, 0, 0)
 
+//let save = saveStateCanvas.toDataURL("img/png")
+ // imageSave.href = save
+
+ //downloadSelect.href = save 
+
+ saveDrawing(e)
+
+})
+
+
+
+
+function saveDrawing(e){
+   
+
+
+  console.log("save")
+  ctxSaveState.drawImage(canvasBack, 0, 0)
+  ctxSaveState.drawImage(canvasDraw, 0, 0)
+
+ let save = saveStateCanvas.toDataURL("img/png")
  
+  
+ let a = document.createElement("a")
+  a.href = save
 
-  //ctxSaveState.drawImage(ctxDraw.canvasDraw, 0, 0)
+  console.log(save)
 
- // saves data as url that can be accessed by visiting the URL
-  //let imageURI = canvasDraw.toDataURL()
+  a.download ="your image"
+  document.body.appendChild(a)
+  a.click()
+  
+  document.body.removeChild(a)
+  window.open(save)
 
-
- // localStorage.setItem("saveState", saveData )
-
-//}
-
-//localStorage.removeItem("saveState")
-//localStorage.clear() // all data
-
-
-
-//function undo(ctxSaveState){
-  //get draw from local storage
-  //let undo = localStorage..getItem("saveSate")
-//
- // ctxDraw = ctxSaveState
-
-  //return ctxDraw
-
-//}
+//window.open(save.href)
 
 
 
+ // ctxSaveState.drawImage(ctxDraw.canvasDraw, 0, 0)
+
+
+
+
+
+ //  saves data as url that can be accessed by visiting the URL
+ // let imageURI = canvasDraw.toDataURL()
+
+
+
+}
 
 
 
