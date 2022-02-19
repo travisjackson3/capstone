@@ -527,9 +527,9 @@ function SaveUserDrawing(e){
   
  let a = document.createElement("a")
   a.href = userSave
- //document.getElementById('user_image_location').value = a.href
-
- console.log( document.getElementById('user_image_location').value)
+ let test = document.getElementById('user_image_location')
+console.log(test)
+ test.value = userSave
 
   //a.download ="your image"
  // document.body.appendChild(a)
@@ -553,8 +553,8 @@ function SaveUserDrawing(e){
 
 
 }
-
-userSaveSelect.addEventListener("click", function(e){
+let usersavetest = document.getElementById("user-test")
+usersavetest.addEventListener("click", function(e){
 
  
   SaveUserDrawing(e)
