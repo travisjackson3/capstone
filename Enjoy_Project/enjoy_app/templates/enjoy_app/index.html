@@ -24,7 +24,35 @@
 
     </header>
 
-    <nav>test nav bar</nav>
+    <nav>test nav bar
+
+<!--        <form action = "submit/"  method="post">
+            {% csrf_token %}
+
+            {{ formSave.image_title }}
+            {{ formSave.user_image_location}}            
+
+          <button type="" id="user-save">Save Image</button>
+
+        </form>
+  
+        <button type="" id="user-save">Save Image</button>
+
+    -->
+        <form action = "submit/"  method="post">
+            {% csrf_token %}
+            
+            <input  type="text">
+
+
+
+          <button id="user-save">Save Image</button>
+
+        </form>
+  
+        <button type="" id="user-save">Save Image</button>
+
+    </nav>
 
     <div id="mainBody">
 
@@ -87,6 +115,33 @@
         
         </footer>
 </div>
+
+
+
+
+
+<button class="open-button" onclick="openForm()" >Open Login</button>
+        <div class="form-popup" id="myForm">
+            
+            <form action = "user/" class="form-container" method="post">
+                {% csrf_token %}
+              <h1>Login</h1>
+                {{ form }}
+                <!--
+              <label for="username"><b>User name</b></label>
+              <input type="text" placeholder="Enter Username" name="username" required value="{{ username }}">
+          
+              <label for="psw"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="psw" required value="{{ password }}">
+                -->
+
+
+                
+              <button type="submit" class="btn">Login</button>
+              <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+                <button>Create User</button>
+          </div>
 
 
 

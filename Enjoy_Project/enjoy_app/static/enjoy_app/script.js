@@ -48,6 +48,9 @@ let redoSelect = document.getElementById("redoButton")
 //download
 let downloadSelect = document.getElementById("downloadButton")
 
+//user save image
+let userSaveSelect = document.getElementById("user-save")
+
 
 
 //color buttons. automate later if time
@@ -482,11 +485,16 @@ downloadSelect.addEventListener("click", function(e){
 
 })
 
+userSaveSelect.addEventListener("click", function(e){
+
+ 
+  SaveUserDrawing(e)
+ 
+ })
 
 
 
-function saveDrawing(e){
-   
+function saveDrawing(e){   
 
 
   console.log("save")
@@ -499,14 +507,35 @@ function saveDrawing(e){
  let a = document.createElement("a")
   a.href = save
 
-  console.log(save)
-
   a.download ="your image"
   document.body.appendChild(a)
   a.click()
   
   document.body.removeChild(a)
-  window.open(save)
+
+}
+
+
+function SaveUserDrawing(e){
+   
+
+  ctxSaveState.drawImage(canvasBack, 0, 0)
+  ctxSaveState.drawImage(canvasDraw, 0, 0)
+
+ let userSave = saveStateCanvas.toDataURL("img/png")
+ 
+  
+ let a = document.createElement("a")
+  a.href = userSave
+ //document.getElementById('user_image_location').value = a.href
+
+ console.log( document.getElementById('user_image_location').value)
+
+  //a.download ="your image"
+ // document.body.appendChild(a)
+ // a.click()
+  
+  //document.body.removeChild(a)
 
 //window.open(save.href)
 
@@ -524,6 +553,16 @@ function saveDrawing(e){
 
 
 }
+
+userSaveSelect.addEventListener("click", function(e){
+
+ 
+  SaveUserDrawing(e)
+ 
+ })
+
+
+
 
 
 
@@ -594,6 +633,34 @@ orangeButton.addEventListener("click", function(e){
   
   })
            
+
+
+
+
+
+
+
+
+
+
+  //test popout user login
+
+  function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
+
+
+
+
+
+
+
+
+
 
 
 

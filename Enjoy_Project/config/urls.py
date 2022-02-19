@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('enjoy_app.urls')) # Note: all your app urls will start with this path
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
