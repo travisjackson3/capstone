@@ -25,33 +25,18 @@
     </header>
 
     <nav>test nav bar
-
-    <!--    <form action = "submit/"  method="post">
-            {% csrf_token %}
-
-            {{ formSave.image_title }}
-            {{ formSave.user_image_location}}            
-
-          <button type="" id="user-save">Save Image</button>
-
-        </form>
-  
-        <button type="" id="user-test">Save Image</button>
--->
    
-       <form action = "submit/"  method="post">
+       <form id ="saveForm" name= "saveForm" action = "submit/"  method="post">
 
             {% csrf_token %}
-            
-            <input  type="text">
-            <input type 
-
-          <button id="">Save Image</button>
-
+            <label for="image_title">Image name:</label>
+            <input  name = "image_title" type="text" id="image_title">
+            <input type="hidden" name = "user_image_location" id="user_image_location">
+            <input type="hidden" name = "user_image_width" id="user_image_width">
+            <input type="hidden" name = "user_image_height" id="user_image_height">
+            <button type="" id="user-save">Save Image</button> 
         </form>
-  
-        <button type="" id="user-save">Save Image</button>
-    
+      
     </nav>
 
     <div id="mainBody">

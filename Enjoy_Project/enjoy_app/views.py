@@ -1,6 +1,8 @@
 import datetime
 import os, sys
-
+import re
+import base64
+from io import BytesIO
 from tkinter import image_names
 from django.forms import ImageField
 from django.shortcuts import render
@@ -9,6 +11,7 @@ from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from PIL import Image
 from django.contrib.auth.models import User
+from enjoy_app.models import UserImage
 from enjoy_app.forms import UserSaveImage
 from enjoy_app.forms import UserLoginForm
 
@@ -125,12 +128,33 @@ def submit(request):
         username = request.user.get_username()
         date_saved = datetime.datetime.now()
         image_title = request.POST["image_title"]
-        user_image_location = request.POST["user_image_location"]
-
+        image_data = request.POST["user_image_location"]
+        image_height = request.POST["user_image_height"]
+        image_width = request.POST["user_image_width"]
         print(username)
-        print(user_image_location)
+        #print(user_image_location)
         print(image_title)
 
+        print(image_height)
+
+
+    image_data = re.sub("^data:image/png;base64,", "", image_data)
+    image_data = base64.b64decode(image_data)
+    image_data = BytesIO(image_data)
+    im = Image.open(image_data)
+    assert (int(image_height), int(image_width)) == im.size
+
+    save_location = f"media/user_save/{image_title}.png"
+   
+    im.save(save_location)
+
+
+
+
+    createtest = UserImage(username=username, date_saved =date_saved,
+         image_title =image_title, user_image_location = save_location)
+
+    createtest.save()
 
 
     return HttpResponseRedirect ("/")

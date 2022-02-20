@@ -12,7 +12,6 @@ let imageSave = new Image
 
 let allowRedo = false
 
-//let imageSaveRedo = document.createElement("img")
 
 
 const drawPickSel = document.querySelectorAll('.drawPickSel');
@@ -50,6 +49,33 @@ let downloadSelect = document.getElementById("downloadButton")
 
 //user save image
 let userSaveSelect = document.getElementById("user-save")
+
+
+
+let saveForm = document.getElementById("saveForm")
+let formdata = new FormData(saveForm);
+console.log(saveForm)
+
+//saveForm.append("user_image_location", testblob)
+
+//let testitem = document.getElementsByName("user_image_location")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -516,50 +542,20 @@ function saveDrawing(e){
 }
 
 
+
+
 function SaveUserDrawing(e){
    
-
   ctxSaveState.drawImage(canvasBack, 0, 0)
   ctxSaveState.drawImage(canvasDraw, 0, 0)
 
  let userSave = saveStateCanvas.toDataURL("img/png")
+
  
-  
- let a = document.createElement("a")
-  a.href = userSave
- let test = document.getElementById('user_image_location')
-console.log(test)
- test.value = userSave
-
-  //a.download ="your image"
- // document.body.appendChild(a)
- // a.click()
-  
-  //document.body.removeChild(a)
-
-//window.open(save.href)
-
-
-
- // ctxSaveState.drawImage(ctxDraw.canvasDraw, 0, 0)
-
-
-
-
-
- //  saves data as url that can be accessed by visiting the URL
- // let imageURI = canvasDraw.toDataURL()
-
-
-
+ document.getElementById('user_image_location').value = userSave
+ document.getElementById('user_image_height').value = saveStateCanvas.height
+ document.getElementById('user_image_width').value = saveStateCanvas.width
 }
-let usersavetest = document.getElementById("user-test")
-usersavetest.addEventListener("click", function(e){
-
- 
-  SaveUserDrawing(e)
- 
- })
 
 
 
@@ -750,3 +746,31 @@ testclick.addEventListener("click", function(){
   //drawFunction(e)
 
 //})
+
+
+
+
+
+
+/*  saveStateCanvas.toBlob(function(blob) {
+  var newImg = document.createElement('img'),
+      url = URL.createObjectURL(blob);
+    //console.log(blob)
+    document.getElementById('user_image_location').value = blob
+    //   set("user_image_location", blob, "image.png")
+  newImg.onload = function() {
+    // no longer need to read the blob so it's revoked
+    URL.revokeObjectURL(url);
+  };
+
+  newImg.src = url;
+  document.body.appendChild(newImg);
+//  formdata.append("user_image_location", blob, "image.png")
+}); */
+
+
+
+//formdata.append("user_image_location", blob, "image.png")
+
+// let a = document.createElement("a")
+//  a.href = userSave
