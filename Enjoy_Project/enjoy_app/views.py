@@ -50,30 +50,12 @@ def index(request):
    # testing.close()
 
     form = UserLoginForm()
-    formSave = UserSaveImage()
+   
 
-    context = {"image": [image1, image2, image3, image4], 'form': form, "formSave": formSave}
+    context = {"image": [image1, image2, image3, image4], 'form': form}
     return render(request, "enjoy_app/index.html", context)
     
        
-
-def user_save_image(request):
-
-    #@login_required
-    ...
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ##
@@ -131,30 +113,26 @@ def submit(request):
         image_data = request.POST["user_image_location"]
         image_height = request.POST["user_image_height"]
         image_width = request.POST["user_image_width"]
-        print(username)
-        #print(user_image_location)
-        print(image_title)
+    
 
-        print(image_height)
+        #converts photo data to image.
+        image_data = re.sub("^data:image/png;base64,", "", image_data)
+        image_data = base64.b64decode(image_data)
+        image_data = BytesIO(image_data)
+        im = Image.open(image_data)
+        assert (int(image_height), int(image_width)) == im.size
 
-
-    image_data = re.sub("^data:image/png;base64,", "", image_data)
-    image_data = base64.b64decode(image_data)
-    image_data = BytesIO(image_data)
-    im = Image.open(image_data)
-    assert (int(image_height), int(image_width)) == im.size
-
-    save_location = f"media/user_save/{image_title}.png"
+        save_location = f"media/user_save/{image_title}.png"
    
-    im.save(save_location)
+        im.save(save_location)
 
 
 
 
-    createtest = UserImage(username=username, date_saved =date_saved,
-         image_title =image_title, user_image_location = save_location)
+        createtest = UserImage(username=username, date_saved =date_saved,
+            image_title =image_title, user_image_location = save_location)
 
-    createtest.save()
+        createtest.save()
 
 
     return HttpResponseRedirect ("/")

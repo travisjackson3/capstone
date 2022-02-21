@@ -18,101 +18,118 @@
 <body>
 
     <div id="contentContainer">
-    <header>
-
-        <h1>test</h1>
-
-    </header>
-
-    <nav>test nav bar
-   
-       <form id ="saveForm" name= "saveForm" action = "submit/"  method="post">
-
-            {% csrf_token %}
-            <label for="image_title">Image name:</label>
-            <input  name = "image_title" type="text" id="image_title">
-            <input type="hidden" name = "user_image_location" id="user_image_location">
-            <input type="hidden" name = "user_image_width" id="user_image_width">
-            <input type="hidden" name = "user_image_height" id="user_image_height">
-            <button type="" id="user-save">Save Image</button> 
-        </form>
-      
-    </nav>
-
-    <div id="mainBody">
+ 
+        <nav>test nav bar
 
 
-        <div id="imageChoice">
 
-            {% for img in image %}
-
-            <img class="drawPickSel" src="{{ img.thumbnail_image_location }}" data-fileLoc="{{ img.image_location }}" />
-            {% endfor %}
-
-        </div>
-
-        <div>
-            <!-- change to forloop if time permits-->
-            <button class="palletButton" id="redSelect"></button>
-            <button class="palletButton" id="blackSelect"></button>
-            <button class="palletButton" id="blueSelect"></button>
-            <button class="palletButton" id="yellowSelect"></button>
-            <button class="palletButton" id="greenSelect"></button>
-            <button class="palletButton" id="pinkSelect"></button>
-            <button class="palletButton" id="whiteSelect"></button>
-            <button class="palletButton" id="greySelect"></button>
-            <button class="palletButton" id="orangeSelect"></button>
-
-            <label for="sizeRange">Brush Size</label>
-            <input type="range" min="1" max="20" value="5" id="sizeRange"></input>
-            
-
-            <button id="eraseSelect">Erase</button>
-            <button id ="undoButton">Undo</button>
-            <button id ="redoButton"  disabled >Redo</button>
-            <button id="downloadButton"   >Download</button>
-            
-        </div>
+        </nav>
 
 
-        <div id="canvasArea">
+        <div id="fullBody">
 
-            <div id="canvasLayers"> 
 
-           <canvas class= "canvases" id="canvasLayerBack" >
-                This text displayed if browser does not support HTML5 Canvas
-            </canvas>
-            <canvas class= "canvases" id="canvasLayerDraw" >  
-            </canvas>
 
-            <canvas class= "canvases" id="canvasLayerCursor" >
-            </canvas>
+            <div id="imageChoice" style="display: none;">
 
+                {% for img in image %}
+
+                <img class="drawPickSel" src="{{ img.thumbnail_image_location }}"
+                    data-fileLoc="{{ img.image_location }}" />
+                {% endfor %}
 
             </div>
+
+            <div id="mainBody">
+
+
+
+
+
+
+                <div id="tool-bar">
+                    <!-- change to forloop if time permits-->
+                    <button class="palletButton" id="redSelect"></button>
+                    <button class="palletButton" id="blackSelect"></button>
+                    <button class="palletButton" id="blueSelect"></button>
+                    <button class="palletButton" id="yellowSelect"></button>
+                    <button class="palletButton" id="greenSelect"></button>
+                    <button class="palletButton" id="pinkSelect"></button>
+                    <button class="palletButton" id="whiteSelect"></button>
+                    <button class="palletButton" id="greySelect"></button>
+                    <button class="palletButton" id="orangeSelect"></button>
+
+                    <label for="sizeRange">Brush Size</label>
+                    <input type="range" min="1" max="20" value="5" id="sizeRange"></input>
+
+
+                    <button id="eraseSelect">Erase</button>
+                    <button id="undoButton">Undo</button>
+                    <button id="redoButton" disabled>Redo</button>
+                    <button id="downloadButton">Download</button>
+
+
+
+                    <form id="saveForm" name="saveForm" action="submit/" method="post">
+
+                        {% csrf_token %}
+                        <label for="image_title">Image name:</label>
+                        <input name="image_title" type="text" id="image_title">
+                        <input type="hidden" name="user_image_location" id="user_image_location">
+                        <input type="hidden" name="user_image_width" id="user_image_width">
+                        <input type="hidden" name="user_image_height" id="user_image_height">
+                        <button type="" id="user-save">Save Image</button>
+                    </form>
+
+                </div>
+
+
+                <div id="canvasArea">
+
+                    <div id="canvasLayers">
+
+                        <canvas class="canvases" id="canvasLayerBack">
+                            This text displayed if browser does not support HTML5 Canvas
+                        </canvas>
+                        <canvas class="canvases" id="canvasLayerDraw">
+                        </canvas>
+
+                        <canvas class="canvases" id="canvasLayerCursor">
+                        </canvas>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
         </div>
 
+
+
+        <footer hidden>
+
+            test footer
+
+        </footer>
     </div>
 
-    <footer>
-
-        test footer
-        
-        </footer>
-</div>
 
 
 
 
-
-<button class="open-button" onclick="openForm()" >Open Login</button>
-        <div class="form-popup" id="myForm">
-            
-            <form action = "user/" class="form-container" method="post">
-                {% csrf_token %}
-              <h1>Login</h1>
-                {{ form }}
-                <!--
+    
+    <div hidden class="form-popup" id="myForm">
+        <button class="open-button" onclick="openForm()">Open Login</button>
+        <form action="user/" class="form-container" method="post">
+            {% csrf_token %}
+            <h1>Login</h1>
+            {{ form }}
+            <!--
               <label for="username"><b>User name</b></label>
               <input type="text" placeholder="Enter Username" name="username" required value="{{ username }}">
           
@@ -121,12 +138,12 @@
                 -->
 
 
-                
-              <button type="submit" class="btn">Login</button>
-              <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-            </form>
-                <button>Create User</button>
-          </div>
+
+            <button type="submit" class="btn">Login</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+        <button>Create User</button>
+    </div>
 
 
 

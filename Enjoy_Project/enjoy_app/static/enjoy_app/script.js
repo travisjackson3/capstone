@@ -11,7 +11,8 @@ let imageRedo = new Image
 let imageSave = new Image
 
 let allowRedo = false
-
+let trueWidth = 0
+let trueHeight = 0
 
 
 const drawPickSel = document.querySelectorAll('.drawPickSel');
@@ -62,17 +63,20 @@ console.log(saveForm)
 
 
 
+let canvasLayers = document.getElementById("canvasArea")
+
+let canvDiv = canvasLayers.getBoundingClientRect()
+console.log(canvDiv.width)
+console.log(canvDiv.height)
+//canvasBack.width = canvDiv.width
+//canvasBack.height = canvDiv.height
+
+let mainBodyElm = document.getElementById("mainBody")
+
+let manBodyDiv = mainBodyElm.getBoundingClientRect()
 
 
-
-
-
-
-
-
-
-
-
+resizeCanvas()
 
 
 
@@ -101,14 +105,35 @@ let sizeWidthDraw = document.getElementById("sizeRange")
 //display size affects accuracy of draw
 //returns correct canvasBack width and height
 //
-resizeCanvas(canvasBack)
-function resizeCanvas(canvasBack) {
 
-  let trueWidth = canvasBack.clientHeight;
-  let trueHeight = canvasBack.clientWidth;
+function resizeCanvas() {
+  let canvDiv = canvasLayers.getBoundingClientRect()
+  var intFrameWidth = window.innerWidth;
+  var intFrameHeight = window.innerHeight;
+
+/*   if (canvDiv.innerWidth >= 800){
+
+    trueWidth = 800
+    trueHeight = 800
+  }
+ */
+
+  let mainBodyDiv = mainBodyElm.getBoundingClientRect()
+  
+
+     console.log(canvDiv.width)
+    trueWidth = canvDiv.width
+     trueHeight = canvDiv.width
 
 
-  if (canvasBack.width !== trueWidth || canvasBack.height !== trueHeight)
+
+
+
+trueWidth = trueHeight
+
+  console.log(canvDiv.width)
+  console.log(canvDiv.height)
+ if (canvasBack.width !== trueWidth || canvasBack.height !== trueHeight){
 
 
     canvasBack.width = trueWidth;
@@ -119,7 +144,19 @@ function resizeCanvas(canvasBack) {
     canvasCursor.height = trueHeight
 
     saveStateCanvas.width = trueWidth
-   saveStateCanvas.height = trueHeight
+    saveStateCanvas.height = trueHeight
+  }
+    
+     
+    // canvasBack.width = window.innerWidth;
+    // canvasBack.height = window.innerHeight
+    // canvasDraw.width = window.innerWidth
+    // canvasDraw.height = window.innerHeight
+    // canvasCursor.width = window.innerWidth
+    // canvasCursor.height = window.innerHeight
+
+    // saveStateCanvas.width = window.innerWidth
+    // saveStateCanvas.height = window.innerHeight
 
 
 
@@ -131,11 +168,19 @@ function resizeCanvas(canvasBack) {
 //resizes the canvasBack size and width
 //finds new position of the canvasBack
 //
-window.addEventListener("resize",function(e){
+window.addEventListener("resize",function(){
 
-  resizeCanvas(canvasBack)
-  
- 
+  let imageBackData = ctxBack.getImageData(0, 0, canvasBack.width, canvasBack.height)
+  let imageDrawData = ctxDraw.getImageData(0, 0, canvasDraw.width, canvasDraw.height)
+  let origWidth = canvasBack.width
+  let origHeight = canvasBack.height
+  console.log(canvasBack.width)
+
+  resizeCanvas()
+
+  console.log(canvasBack.width)
+  ctxBack.putImageData(imageBackData, 0, 0, origWidth, origHeight, 0,0,canvasBack.width, canvasBack.height)
+  ctxDraw.putImageData(imageDrawData, 0, 0, canvasDraw.width, canvasDraw.height,0,0,0,0)
   
   })
 
@@ -154,7 +199,7 @@ ctxBack.fillRect(0, 0, canvasBack.width, canvasBack.height)
 //
 drawPickSel.forEach(element => element.addEventListener('click', event => {
 
-  resizeCanvas(canvasBack)
+  resizeCanvas()
   data = element.dataset;
 
   let ctxBack = canvasBack.getContext("2d");
@@ -162,13 +207,10 @@ drawPickSel.forEach(element => element.addEventListener('click', event => {
 
   ctxBack.fillStyle = "white";
   ctxBack.fillRect(0, 0, canvasBack.width, canvasBack.height)
-  //testchange = document.getElementById("testchange")
 
   
   let img = document.createElement("img");
   img.src = data.fileloc
-
-  //testchange.setAttribute("src", element.id)
 
   img.onload = function () { ctxBack.drawImage(img, 0, 0, img.width, img.height) }
 
@@ -185,7 +227,6 @@ sizeWidthDraw.addEventListener("change", function(){
 brushSize  = document.getElementById("sizeRange").value
 
 })
-
 
 
 

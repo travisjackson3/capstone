@@ -1,53 +1,97 @@
+.palletButton {
+    border: black solid 1px;
 
-/*
+        padding: 15px 32px;
+ 
 
-#contentContainer {
-    height: fit-content;
-    background-color: yellow;
-    max-width: 1024px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 2px black solid ;
+  }
 
-}
+  #redSelect{
 
-
-header {
-    height: 10vh;
-    border: 2px black solid ;
-}
-
-nav {
-    height: 5vh;
-    border: 2px black solid ;
-}
-
-#mainBody {
-
-    border: 2px black solid ;
-    max-height: 85vh;
-    background-color: azure;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-
-}
-
-
-
-
-
-
-
-
-nav {
-    border: 2px black solid ;
     background-color: red;
 
+  }
+
+  #blackSelect{
+
+    background-color: black;
+
+  }
+
+  #blueSelect{
+
+    background-color: blue;
+
+  }
+  #yellowSelect{
+
+    background-color: yellow;
+
+  }
+  #greenSelect{
+
+    background-color: green;
+
+  }
+  #pinkSelect{
+
+    background-color: pink;
+
+  }
+  #whiteSelect{
+
+    background-color: white;
+
+  }
+  #greySelect{
+
+    background-color: grey;
+
+  }
+  #orangeSelect{
+
+    background-color: orange;
+
+  }
+#canvasLayerBack{
+
+    z-index: 1;
+    max-width: 800px;
+    max-height: 800px;
+
+
 }
 
 
-*/
+#canvasLayers{
+
+    position: relative;
+}
+
+#canvasLayerDraw{
+
+    z-index: 2;
+    position: absolute;
+    left: 0px;
+    top:0px;
+    max-width: 800px;
+    max-height: 800px;
+
+
+
+}
+
+#canvasLayerCursor{
+
+    z-index: 3;
+
+    position: absolute;
+    left: 0px;
+    top:0px; 
+    max-width: 800px;
+    max-height: 800px;
+
+}
 
 
 #contentContainer {
@@ -104,17 +148,29 @@ nav {
     background-color: lightblue;
 
     display: flex;
-
     justify-content: center;
 
+    max-width: 100%;
     min-width: 100%;
 
 
 
 }
 
+#tool-bar{
+
+    display: flex;
+    flex-wrap: wrap;
+    order: 2;
+
+    min-width: 100%;
+    max-width: 100%;
+
+
+}
 
 footer{
+
 min-height: 5vh;
 background-color: beige;
 }
@@ -122,49 +178,36 @@ background-color: beige;
 
 .canvases{
 
-    width: 200px;
-    height: 200px;
     cursor: crosshair;
 
-}
-@media only screen and (min-width: 420px) {
-
-    .canvases{
-
-        width: 400px;
-        height: 400px;
-    }
 
 }
 
-@media only screen and (min-width: 500px) {
+nav{
 
-    .canvases{
+    min-height: 10vh;
+    
+    background-color: #f1f1f1;
 
-        width: 400px;
-        height: 400px;
-    }
+}
+
+h1{
+    margin-top: 0px;
 
 }
 
 
+#fullBody{
 
 
-
-
-
-
-
-
+    min-height: 84vh;
+    max-height: 84vh;
+}
 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 625px) {
 
-
-    h1 {
-        text-align: center;
-    }
 
 
 
@@ -173,14 +216,6 @@ background-color: beige;
         min-width: 100%;
         min-height: fit-content;
 
-    }
-
-
-    .canvases{
-
-        width: 600px;
-
-        height: 600px;
     }
 
 
@@ -196,126 +231,22 @@ background-color: beige;
 @media only screen and (min-width: 850px) {
 
 
-    .canvases{
+.drawPickSel {
 
-        width: 600px;
-        height: 600px;
-        border: black solid 2px;
-
-    }
-/*
+    max-width: 200px;
 
 
-    .drawPickSel {
-        max-height: 100px;
-    }
-
-
-    #canvasArea {
-        margin-left: auto;
-        margin-right: auto;
-        min-height: fit-content;
-
-        background-color: lightblue;
-
-        display: flex;
-
-        justify-content: center;
-        padding: 10px;
-        min-width: 100%;
-        border: 2px black solid ;
-
-
-    }
-
-    canvases{
-        height:500px;
-        border: 2px black solid ;
-    }
-
-footer{
-    min-height: 5vh;
-    background-color: beige;
 }
 
-header {
-    height: 10vh;
-    border: 2px black solid ;
-}
-
-nav {
-    height: 5vh;
-    border: 2px black solid ;
-}
 
 #mainBody {
 
-    border: 2px black solid ;
-    max-height: 85vh;
     background-color: azure;
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;
-
-}
-
-
-#imageChoice {
-    border: 2px black solid ;
-    min-height: 100%;
-    min-width: 175px;
-    max-width: 20vw;
-    display: flex;
     flex-direction: column;
-    background-color: aqua;
-    align-items: center;
-    overflow-y: scroll;
-    gap: 10px;
-}
-
-.drawPickSel {
-    border: 2px black solid ;
-    max-width: 200px;
-
-
-
-}
-
-
-#canvasArea {
-    border: 2px black solid ;
-    margin-left: auto;
-    margin-right: auto;
     min-height: fit-content;
-
-    background-color: lightblue;
-
-    display: flex;
-
-    justify-content: center;
-    padding: 10px;
-    max-width: 70%;
-    min-width: 70%;
-
-
-}
-
-*/
-.drawPickSel {
-
-    max-width: 200px;
-
-
-}
-
-
-#mainBody {
-
-    background-color: azure;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    flex-direction: row;
 
 }
 
@@ -344,14 +275,10 @@ nav {
     justify-content: center;
     padding: 10px;
     max-width: 70%;
-    min-width: 70%;
+    min-width: 800px;
 
 
 }
-
-
-
-
 
 
 
@@ -362,21 +289,43 @@ nav {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
 
-    #canvasLayers{
 
-        position: relative;
+    #contentContainer{
+
+        background-color: aliceblue;
+
+    }
+
+
+    #fullBody{
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+
+
     }
 
 
 
-    .canvases{
-        width: 800px;
-        height: 800px;
-        min-height: fit-content;
- 
 
+    #imageChoice {
 
+        background-color: aquamarine;
+        min-width: 100%;
+        min-height: 60vh;
+    
+        display: flex;
+        flex-direction: row;
+        background-color: aqua;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;    
+    
+        overflow-x: auto;
     }
+
+
     #canvasArea {
 
         margin-left: auto;
@@ -388,104 +337,64 @@ nav {
         display: flex;
         padding: 20px;
         justify-content: center;
-
-        max-width: 70%;
-        min-width: fit-content;
-
     
+      
     }
 
-    #canvasLayerBack{
-
-        z-index: 1;
-        height: 800px;
-        width: 800px;
-
-    
-    }
-    
-    #canvasLayerDraw{
-    
-        z-index: 2;
-        position: absolute;
-        left: 0px;
-        top:0px;
-
-        height: 800px;
-        width: 800px;
-    
-    }
-    
-    #canvasLayerCursor{
-    
-        z-index: 3;
-
-        position: absolute;
-        left: 0px;
-        top:0px; 
-        height: 800px;
-        width: 800px;
-    }
-
-   
-    .palletButton {
-        border: black solid 1px;
-
-            padding: 15px 32px;
-     
-
-      }
-
-      #redSelect{
-
-        background-color: red;
-
-      }
-
-      #blackSelect{
-
-        background-color: black;
-
-      }
-
-      #blueSelect{
-
-        background-color: blue;
-
-      }
-      #yellowSelect{
-
-        background-color: yellow;
-
-      }
-      #greenSelect{
-
-        background-color: green;
-
-      }
-      #pinkSelect{
-
-        background-color: pink;
-
-      }
-      #whiteSelect{
-
-        background-color: white;
-
-      }
-      #greySelect{
-
-        background-color: grey;
-
-      }
-      #orangeSelect{
-
-        background-color: orange;
-
-      }
 
 
       
+}
+
+@media only screen and (min-width:1000px) {
+
+
+
+mainBody{
+
+    flex-direction: column;
+    max-height: 84vh;
+    min-height: 84vh;
+
+
+}
+
+canvasArea{
+
+
+    max-width:75%;
+
+
+}
+
+#tool-bar{
+
+    display: flex;
+    flex-wrap: nowrap;
+    order: 1;
+    max-width: 10%;
+
+}
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+
+    #canvasArea {
+        margin-left: auto;
+        margin-right: auto;
+        min-height: fit-content;
+        
+        background-color: lightblue;
+    
+        display: flex;
+        padding: 20px;
+        justify-content: center;
+    
+    }
+
+
+    
       /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
     background-color: #555;
@@ -557,81 +466,5 @@ nav {
 
 
 
-
-
-
-
-
-}
-
-
-
-
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-
-    h1 {
-
-        font-style: italic;
-
-    }
-
-
-    #canvasArea {
-        margin-left: auto;
-        margin-right: auto;
-        min-height: fit-content;
-    
-        background-color: lightblue;
-    
-        display: flex;
-        padding: 20px;
-        justify-content: center;
-
-        max-width: 70%;
-        min-width: 70%;
-
-    
-    }
-
-    /*    image{
-
-       width: 100%;
-       height: 100%;
-
-    }
-
-
-        
-        
-        
-    #mainBody{
-        
-        display: block;
-        min-width: 100vw;
-        min-height: 100vh;
-
-        } 
-
-
-    #imageChoice{
-
-        align-content: center;
-        float: left;
-        min-height: 100%;
-        width: 250px;
-        background-color: aqua;       
-        
-        }
-
-        
-    #canvasArea{
-        min-height: 100%;
-        display: flex;
-        background-color: lightblue;
-    }
-*/
-
-
+  
 }
