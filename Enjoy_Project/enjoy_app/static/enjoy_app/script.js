@@ -13,7 +13,7 @@ let imageSave = new Image
 let allowRedo = false
 let trueWidth = 0
 let trueHeight = 0
-
+let imgOriginal = document.createElement("img")
 
 const drawPickSel = document.querySelectorAll('.drawPickSel');
 
@@ -36,6 +36,23 @@ let saveStateCanvas = document.createElement("canvas")
 let ctxSaveState = saveStateCanvas.getContext("2d")
 
 
+
+//image choice section
+
+let imageChoiceSection = document.getElementById("imageChoice")
+//user section
+
+let userSection = document.getElementById("userDiv")
+
+
+//draw section
+let mainBodyElm = document.getElementById("mainBody")
+
+
+let manBodyDiv = mainBodyElm.getBoundingClientRect()
+
+
+
 //erase
 let eraseSelect = document.getElementById("eraseSelect")
 
@@ -52,10 +69,11 @@ let downloadSelect = document.getElementById("downloadButton")
 let userSaveSelect = document.getElementById("user-save")
 
 
+//
+
 
 let saveForm = document.getElementById("saveForm")
-let formdata = new FormData(saveForm);
-console.log(saveForm)
+//let formdata = new FormData(saveForm);
 
 //saveForm.append("user_image_location", testblob)
 
@@ -63,20 +81,35 @@ console.log(saveForm)
 
 
 
-let canvasLayers = document.getElementById("canvasArea")
+let canvasLayers = document.getElementById("canvasLayers")
 
 let canvDiv = canvasLayers.getBoundingClientRect()
-console.log(canvDiv.width)
-console.log(canvDiv.height)
+
 //canvasBack.width = canvDiv.width
 //canvasBack.height = canvDiv.height
 
-let mainBodyElm = document.getElementById("mainBody")
 
-let manBodyDiv = mainBodyElm.getBoundingClientRect()
+
+  //Resize canvas
+  let resizeCanvasElement = document.createElement("canvas")
+  let ctxRezise = resizeCanvasElement.getContext("2d")
+
+    //Resize back image canvas
+    let resizeBackCanvas = document.createElement("canvas")
+    let ctxResizeBack = resizeBackCanvas.getContext("2d")
+  
+
 
 
 resizeCanvas()
+imageChoiceSection.style.display = "flex";
+userSection.style.display = "none";
+mainBodyElm.style.display = "none"
+
+//Fills canvasBack with white background
+ctxBack.fillStyle = "white";
+ctxBack.fillRect(0, 0, canvasBack.width, canvasBack.height)
+
 
 
 
@@ -107,9 +140,9 @@ let sizeWidthDraw = document.getElementById("sizeRange")
 //
 
 function resizeCanvas() {
-  let canvDiv = canvasLayers.getBoundingClientRect()
-  var intFrameWidth = window.innerWidth;
-  var intFrameHeight = window.innerHeight;
+
+
+
 
 /*   if (canvDiv.innerWidth >= 800){
 
@@ -117,79 +150,128 @@ function resizeCanvas() {
     trueHeight = 800
   }
  */
-
-  let mainBodyDiv = mainBodyElm.getBoundingClientRect()
+ //if (intFrameWidth > 700){
+  //  trueWidth = 700
+    //trueHeight = 700
+  //  console.log(intFrameWidth)
   
+ //}
 
-     console.log(canvDiv.width)
-    trueWidth = canvDiv.width
-     trueHeight = canvDiv.width
+ //else if (intFrameWidth < 709){
 
+ // trueWidth = intFrameWidth 
+ // trueHeight = intFrameWidth
 
-
-
-
-trueWidth = trueHeight
-
-  console.log(canvDiv.width)
-  console.log(canvDiv.height)
- if (canvasBack.width !== trueWidth || canvasBack.height !== trueHeight){
+// }
 
 
-    canvasBack.width = trueWidth;
-    canvasBack.height = trueHeight
-    canvasDraw.width = trueWidth
-    canvasDraw.height = trueHeight
-    canvasCursor.width = trueWidth;
-    canvasCursor.height = trueHeight
 
-    saveStateCanvas.width = trueWidth
-    saveStateCanvas.height = trueHeight
-  }
+
+ //if (canvasBack.width !== canvDiv.width || canvasBack.height !== canvDiv.height){
+
+
+    canvasBack.width = canvDiv.width -2
+    canvasBack.height = canvDiv.height -2
+    canvasDraw.width = canvDiv.width -2
+    canvasDraw.height = canvDiv.height -2
+    canvasCursor.width = canvDiv.width -2
+    canvasCursor.height = canvDiv.height -2
+
+    saveStateCanvas.width = canvDiv.width -2
+    saveStateCanvas.height = canvDiv.height -2
+ // }
+
+ // else{
+
+
+
+
+ // }
     
-     
-    // canvasBack.width = window.innerWidth;
-    // canvasBack.height = window.innerHeight
-    // canvasDraw.width = window.innerWidth
-    // canvasDraw.height = window.innerHeight
-    // canvasCursor.width = window.innerWidth
-    // canvasCursor.height = window.innerHeight
-
-    // saveStateCanvas.width = window.innerWidth
-    // saveStateCanvas.height = window.innerHeight
-
-
-
 
 }
-
+let imageTest = new Image()
 //
 //checks for window resize
 //resizes the canvasBack size and width
 //finds new position of the canvasBack
 //
-window.addEventListener("resize",function(){
+window.addEventListener("resize", windowSizeChange)
+window.addEventListener("orientationchange", windowSizeChange)
 
-  let imageBackData = ctxBack.getImageData(0, 0, canvasBack.width, canvasBack.height)
-  let imageDrawData = ctxDraw.getImageData(0, 0, canvasDraw.width, canvasDraw.height)
-  let origWidth = canvasBack.width
-  let origHeight = canvasBack.height
-  console.log(canvasBack.width)
 
-  resizeCanvas()
 
-  console.log(canvasBack.width)
-  ctxBack.putImageData(imageBackData, 0, 0, origWidth, origHeight, 0,0,canvasBack.width, canvasBack.height)
-  ctxDraw.putImageData(imageDrawData, 0, 0, canvasDraw.width, canvasDraw.height,0,0,0,0)
+
+function windowSizeChange(){
+
+
+
+  let canvDiv = canvasLayers.getBoundingClientRect()
+
+  let resizeCanvasElement = document.createElement("canvas")
   
-  })
+    resizeCanvasElement.width = 700
+    resizeCanvasElement.height = 700
+   
+  let ctxRezise = resizeCanvasElement.getContext("2d")
+  
+   // ctxRezise.drawImage(canvasDraw, 0, 0) 
+
+
+ console.log("div width" + canvDiv.width)
+ console.log("canvas draw width" + canvasDraw.width)
+
+
+ if (canvasDraw.width !== (canvDiv.width -2) || canvasDraw.height !== (canvDiv.height -2)){
 
 
 
+  ratioWidth = canvDiv.width / (canvasDraw.width - 2) 
+  ratioHeight = canvDiv.height / (canvasDraw.height -2)  
 
-//Fills canvasBack with white background
-ctxBack.fillStyle = "white";
-ctxBack.fillRect(0, 0, canvasBack.width, canvasBack.height)
+  ctxRezise.scale(ratioWidth, ratioHeight)
+
+
+  ctxRezise.drawImage(canvasDraw, 0, 0)
+  
+
+  console.log("div width" + canvDiv.width)
+  console.log("canvas draw width" + canvasDraw.width)
+
+   console.log("new can width" + resizeBackCanvas.width)
+  
+
+  canvasDraw.width = canvDiv.width -2
+  canvasDraw.height = canvDiv.height -2
+  canvasCursor.width = canvDiv.width -2
+  canvasCursor.height = canvDiv.height -2
+
+
+  //ctxDraw.clearRect(0, 0, canvasDraw.width, canvasDraw.height);
+ 
+
+ console.log(ratioHeight)
+ console.log(ratioWidth)
+
+
+
+ 
+  
+
+  ctxDraw.drawImage(resizeCanvasElement, 0, 0)
+
+
+
+ ratioHeight = 0
+ ratioWidth = 0
+
+
+ ctxBack.drawImage(imgOriginal, 0, 0, canvasBack.width, canvasBack.height)  
+
+}
+
+}
+
 
 
 
@@ -211,9 +293,46 @@ drawPickSel.forEach(element => element.addEventListener('click', event => {
   
   let img = document.createElement("img");
   img.src = data.fileloc
+  imgOriginal.src = data.fileloc
 
-  img.onload = function () { ctxBack.drawImage(img, 0, 0, img.width, img.height) }
+  img.onload = function () {
 
+
+      
+  
+    ctxBack.drawImage(img, 0, 0, canvasBack.width, canvasBack.height)
+
+
+
+
+    drawOpen() 
+
+
+
+
+    // ctxBack.drawImage(img, 0, 0, img.width, img.height)
+   //  ctxRezise.drawImage(img, 0, 0, img.width, img.height)
+   
+
+    
+  //  ratioWidth = canvasBack.width / origWidth 
+ //   ratioHeight = canvasBack.height / origHeight
+
+ //   console.log("ratio width" + ratioWidth)
+ //   console.log("ratio height" + ratioHeight)
+  
+
+ //   ctxDraw.scale(canvasBack.width, canvasBack.height)
+  
+   // console.log(resizeCanvasElement.width)
+  
+    //ctxDraw.drawImage(resizeCanvasElement, 0, 0)
+
+
+ //   ctxBack.drawImage(img, 0, 0, img.width, img.height)
+  }
+
+  
 
 }));
 
@@ -552,16 +671,16 @@ downloadSelect.addEventListener("click", function(e){
 
 })
 
-userSaveSelect.addEventListener("click", function(e){
+//userSaveSelect.addEventListener("click", function(e){
 
  
-  SaveUserDrawing(e)
+ // saveUserDrawing(e)
  
- })
+// })
 
 
 
-function saveDrawing(e){   
+function saveDrawing(){   
 
 
   console.log("save")
@@ -688,6 +807,39 @@ orangeButton.addEventListener("click", function(e){
   
   function closeForm() {
     document.getElementById("myForm").style.display = "none";
+  }
+
+  function drawOpen() {
+    
+    imageChoiceSection.style.display = "none";
+    userSection.style.display = "none";
+    mainBodyElm.style.display = "flex"
+  
+    document.getElementById("draw-section-btn").style.display = "block"
+
+
+  }
+
+  function userOpen() {
+
+    imageChoiceSection.style.display = "none";
+    userSection.style.display = "flex";
+    mainBodyElm.style.display = "none"
+    document.getElementById("user-section-btn").style.display = "none"
+    document.getElementById("draw-section-btn").style.display = "block"
+
+
+  }
+
+  function pickOpen() {
+
+    imageChoiceSection.style.display = "flex";
+    userSection.style.display = "none";
+    mainBodyElm.style.display = "none"
+    document.getElementById("draw-section-btn").style.display = "block"
+    document.getElementById("user-section-btn").style.display = "block"
+
+
   }
 
 

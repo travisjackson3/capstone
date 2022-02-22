@@ -56,8 +56,9 @@
 #canvasLayerBack{
 
     z-index: 1;
-    max-width: 800px;
-    max-height: 800px;
+
+height: 300px;
+width: 300px;
 
 
 }
@@ -66,6 +67,9 @@
 #canvasLayers{
 
     position: relative;
+    border: black solid 1px;
+height: 300px;
+width: 300px;
 }
 
 #canvasLayerDraw{
@@ -74,8 +78,9 @@
     position: absolute;
     left: 0px;
     top:0px;
-    max-width: 800px;
-    max-height: 800px;
+    height: 300px;
+    width: 300px;
+
 
 
 
@@ -88,8 +93,8 @@
     position: absolute;
     left: 0px;
     top:0px; 
-    max-width: 800px;
-    max-height: 800px;
+    height: 300px;
+    width: 300px;
 
 }
 
@@ -100,13 +105,13 @@
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
-
+    border: black solid 1px;
 }
 
 
 #mainBody {
 
-
+  border: black solid 1px;
     min-height: fit-content;
 
     background-color: azure;
@@ -114,13 +119,14 @@
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
+    max-width: 100%;
 
 
 }
 
 
 #imageChoice {
-
+  border: black solid 1px;
     min-width: 100%;
     min-height: 125px;
 
@@ -152,7 +158,7 @@
 
     max-width: 100%;
     min-width: 100%;
-
+    border: black solid 1px;
 
 
 }
@@ -165,12 +171,12 @@
 
     min-width: 100%;
     max-width: 100%;
-
+    border: black solid 1px;
 
 }
 
 footer{
-
+  border: black solid 1px;
 min-height: 5vh;
 background-color: beige;
 }
@@ -184,7 +190,7 @@ background-color: beige;
 }
 
 nav{
-
+  border: black solid 1px;
     min-height: 10vh;
     
     background-color: #f1f1f1;
@@ -199,10 +205,95 @@ h1{
 
 #fullBody{
 
+  border: black solid 1px;
+  min-height: 80vh;
 
-    min-height: 84vh;
-    max-height: 84vh;
 }
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 420px) {
+
+  #canvasLayerBack{
+
+height: 400px;
+width: 400px;
+
+
+}
+
+
+#canvasLayers{
+
+
+height: 400px;
+width: 400px;
+}
+
+#canvasLayerDraw{
+
+
+    height: 400px;
+    width: 400px;
+
+
+
+
+}
+
+#canvasLayerCursor{
+
+
+    height: 400px;
+    width: 400px;
+
+}
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width:500px) {
+
+  #canvasLayerBack{
+
+height: 500px;
+width: 500px;
+
+
+}
+
+
+#canvasLayers{
+
+
+height: 500px;
+width: 500px;
+}
+
+#canvasLayerDraw{
+
+
+    height: 500px;
+    width: 500px;
+
+
+
+
+}
+
+#canvasLayerCursor{
+
+
+    height: 500px;
+    width: 500px;
+
+}
+}
+
+
+
+
+
 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -217,6 +308,41 @@ h1{
         min-height: fit-content;
 
     }
+
+    #canvasLayerBack{
+
+      height: 600px;
+      width: 600px;
+      
+      
+      }
+      
+      
+      #canvasLayers{
+      
+      
+      height: 600px;
+      width: 600px;
+      }
+      
+      #canvasLayerDraw{
+      
+      
+          height: 600px;
+          width: 600px;
+      
+      
+      
+      
+      }
+      
+      #canvasLayerCursor{
+      
+      
+          height: 600px;
+          width: 600px;
+      
+      }
 
 
 
@@ -274,9 +400,53 @@ h1{
     display: flex;
     justify-content: center;
     padding: 10px;
-    max-width: 70%;
-    min-width: 800px;
+    max-width: 100%;
+    min-width: 0px;
 
+
+}
+
+#canvasLayerBack{
+
+  z-index: 1;
+  width: 700px;
+  height: 700px;
+
+
+
+}
+
+
+#canvasLayers{
+
+  position: relative;
+  border: black solid 1px;
+  width: 700px;
+  height: 700px;
+}
+
+#canvasLayerDraw{
+
+  z-index: 2;
+  position: absolute;
+  left: 0px;
+  top:0px;
+  width: 700px;
+  height: 700px;
+
+
+
+}
+
+#canvasLayerCursor{
+
+  z-index: 3;
+
+  position: absolute;
+  left: 0px;
+  top:0px; 
+  width: 700px;
+  height: 700px;
 
 }
 
@@ -307,6 +477,11 @@ h1{
     }
 
 
+    #mainBody{
+
+      flex-direction: row;
+
+    }
 
 
     #imageChoice {
@@ -335,14 +510,21 @@ h1{
         background-color: lightblue;
 
         display: flex;
-        padding: 20px;
+        padding: 10px;
         justify-content: center;
-    
+        order: 2;
       
     }
 
-
-
+    #tool-bar{
+      flex-direction: column;
+      max-width: 220px ;
+      min-width: 0px;
+      flex-wrap: wrap;
+      order: 1;
+      margin-left: 20px;
+      align-content: center;
+    }
       
 }
 
@@ -359,7 +541,7 @@ mainBody{
 
 }
 
-canvasArea{
+#canvasArea{
 
 
     max-width:75%;
@@ -372,7 +554,7 @@ canvasArea{
     display: flex;
     flex-wrap: nowrap;
     order: 1;
-    max-width: 10%;
+
 
 }
 }

@@ -16,3 +16,10 @@ class UserSaveImage(ModelForm):
     class Meta:
         model = UserImage
         fields = ["image_title", "user_image_location"]
+
+
+class UserCreateForm(ModelForm):
+    class Meta:
+
+        model = User
+        fields = ['username', 'password']

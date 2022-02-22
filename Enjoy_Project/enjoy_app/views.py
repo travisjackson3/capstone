@@ -13,9 +13,11 @@ from PIL import Image
 from django.contrib.auth.models import User
 from enjoy_app.models import UserImage
 from enjoy_app.forms import UserSaveImage
-from enjoy_app.forms import UserLoginForm
+from enjoy_app.forms import UserLoginForm, UserCreateForm
 
 from enjoy_app.models import ImageLibrary
+
+from django.shortcuts import redirect, render
 
 
 def index(request):
@@ -50,9 +52,9 @@ def index(request):
    # testing.close()
 
     form = UserLoginForm()
-   
+    create_form = UserCreateForm()
 
-    context = {"image": [image1, image2, image3, image4], 'form': form}
+    context = {"image": [image1, image2, image3, image4], 'form': form, "create_form": create_form}
     return render(request, "enjoy_app/index.html", context)
     
        
@@ -64,13 +66,19 @@ def index(request):
 
 
 def create_user(request):
-    #user = User.objects.create_user()
-    # user.name = "test"
-    # user.save()
-    ...
 
+    print(request)
+    if request.method == "POST":
 
+        username = request.POST['username']
+        password = request.POST['password']
 
+        user = User.objects.create_user(username, None, password)
+        user.save()
+
+        return HttpResponse("success")
+
+    return redirect("/")
 
 
 
@@ -84,20 +92,25 @@ def my_login(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+
         if user is not None:
             login(request, user)
         # redirect to a success page
-            return HttpResponse('success')
+            return redirect("/")
+
 
         else:
 
             return HttpResponse("fail")
 
-def logout_view(request):
-    ...
-   # logout(request)
-    # redirect to a success page.
 
+
+
+def logout_view(request):
+   
+    logout(request)
+
+    return redirect("/")
 
 
 
@@ -127,7 +140,7 @@ def submit(request):
         im.save(save_location)
 
 
-
+#### Check if filename already exists. Add? (1) at end?
 
         createtest = UserImage(username=username, date_saved =date_saved,
             image_title =image_title, user_image_location = save_location)
