@@ -4,6 +4,9 @@
 
 Enjoy: Colorful Fun
 
+## Deployed at https://travishjackson.com/enjoy/
+
+
 ## Project Overview
  The major features of my project include the ability to select from a range of black and white images that can be edited by the user by using a paintbrush with a color pallet. 
  The project is meant to provide the user a way to be creative and draw on images. The project will include the use of Django, python, HTML, CSS and JavaScript. The main library used will be Pillow for image processing. JavaScript will provide the main frontend functions in the image editing canvas.
