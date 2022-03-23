@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
+#import cloudinary
+#import cloudinary.uploader
+#import cloudinary.api
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'enjoy_app'
+     'enjoy_app',
+  #   "cloudinary"
 ]
 
 MIDDLEWARE = [
@@ -130,3 +136,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 import django_on_heroku
 django_on_heroku.settings(locals())
+
+
+
+# adding config
+# cloudinary.config( 
+#   cloud_name = "YOUR_CLOUD_NAME", 
+#   api_key = "YOUR_API_KEY", 
+#   api_secret = "YOUR_API_SECRET" 
+# )

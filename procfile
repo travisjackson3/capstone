@@ -1,2 +1,2 @@
-web: cd Enjoy_Project && gunicorn config.wsgi
+web: cd Enjoy_Project  && gunicorn config.wsgi
 release: cd Enjoy_Project && python manage.py migrate
